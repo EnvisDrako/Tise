@@ -1,0 +1,76 @@
+[2025-11-06 11:27:15] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-06 13:04:45] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-12 12:58:52] [EXCEPTION] [IP:Unknown] Call to undefined function getDB() | Context: {"file":"D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php","line":19,"trace":"#0 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(30): SystemMonitor->__construct()\n#1 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(611): SystemMonitor::getInstance()\n#2 D:\\xampp\\htdocs\\integrated-crm\\includes\\functions.php(21): initializeSystemMonitoring()\n#3 D:\\xampp\\htdocs\\integrated-crm\\includes\\public_header.php(3): require_once('...')\n#4 D:\\xampp\\htdocs\\integrated-crm\\public\\index.php(55): include('...')\n#5 {main}","code":0}
+[2025-11-12 12:59:10] [EXCEPTION] [IP:Unknown] Call to undefined function getDB() | Context: {"file":"D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php","line":19,"trace":"#0 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(30): SystemMonitor->__construct()\n#1 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(611): SystemMonitor::getInstance()\n#2 D:\\xampp\\htdocs\\integrated-crm\\includes\\functions.php(21): initializeSystemMonitoring()\n#3 D:\\xampp\\htdocs\\integrated-crm\\includes\\public_header.php(3): require_once('...')\n#4 D:\\xampp\\htdocs\\integrated-crm\\public\\index.php(55): include('...')\n#5 {main}","code":0}
+[2025-11-12 13:07:58] [EXCEPTION] [IP:::1] Call to undefined function getDB() | Context: {"file":"D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php","line":19,"trace":"#0 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(30): SystemMonitor->__construct()\n#1 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(611): SystemMonitor::getInstance()\n#2 D:\\xampp\\htdocs\\integrated-crm\\includes\\functions.php(21): initializeSystemMonitoring()\n#3 D:\\xampp\\htdocs\\integrated-crm\\public\\diagnostic_simple.php(32): require_once('D:\\\\xampp\\\\htdocs...')\n#4 {main}","code":0}
+[2025-11-12 13:08:12] [EXCEPTION] [IP:::1] Call to undefined function getDB() | Context: {"file":"D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php","line":19,"trace":"#0 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(30): SystemMonitor->__construct()\n#1 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(611): SystemMonitor::getInstance()\n#2 D:\\xampp\\htdocs\\integrated-crm\\includes\\functions.php(21): initializeSystemMonitoring()\n#3 D:\\xampp\\htdocs\\integrated-crm\\includes\\public_header.php(3): require_once('D:\\\\xampp\\\\htdocs...')\n#4 D:\\xampp\\htdocs\\integrated-crm\\public\\index.php(55): include('D:\\\\xampp\\\\htdocs...')\n#5 {main}","code":0}
+[2025-11-12 13:08:18] [EXCEPTION] [IP:::1] Call to undefined function getDB() | Context: {"file":"D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php","line":19,"trace":"#0 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(30): SystemMonitor->__construct()\n#1 D:\\xampp\\htdocs\\integrated-crm\\includes\\SystemMonitor.php(611): SystemMonitor::getInstance()\n#2 D:\\xampp\\htdocs\\integrated-crm\\includes\\functions.php(21): initializeSystemMonitoring()\n#3 D:\\xampp\\htdocs\\integrated-crm\\includes\\public_header.php(3): require_once('D:\\\\xampp\\\\htdocs...')\n#4 D:\\xampp\\htdocs\\integrated-crm\\public\\index.php(55): include('D:\\\\xampp\\\\htdocs...')\n#5 {main}","code":0}
+[2025-11-12 13:39:26] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-13 03:11:51] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-13 03:34:36] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 03:36:01] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-13 03:36:55] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 04:12:40] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 04:14:43] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-13 04:14:57] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 04:27:41] [INFO] User logout: ID 1, Username: Test Admin, Role: admin, IP: ::1
+[2025-11-13 04:51:05] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 04:51:34] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-13 04:57:03] [INFO] Admin created new institution: Temp (Code: aa)
+[2025-11-13 04:57:41] [ERROR] Error in user management: Invalid phone number.
+[2025-11-13 04:58:10] [INFO] Admin created new user: cheirn (Role: enquirer)
+[2025-11-13 04:58:23] [INFO] Admin updated user ID: 2
+[2025-11-13 04:58:25] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 04:58:59] [INFO] Admin updated user ID: 2
+[2025-11-13 04:59:01] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 04:59:06] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 04:59:43] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 04:59:45] [INFO] User logout: ID 2, Username: cc, Role: enquirer, IP: ::1
+[2025-11-13 05:00:11] [INFO] Admin added enquiry: aa
+[2025-11-13 05:00:16] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 05:00:21] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 05:01:18] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 05:01:21] [INFO] User logout: ID 2, Username: cc, Role: enquirer, IP: ::1
+[2025-11-13 05:01:33] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-13 09:43:43] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-13 09:44:20] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 09:44:25] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 09:44:36] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 09:44:48] [ERROR] Error getting enquiry history: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.enquiry_history' doesn't exist
+[2025-11-13 09:44:55] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 09:45:20] [INFO] User logout: ID 2, Username: cc, Role: enquirer, IP: ::1
+[2025-11-13 09:56:49] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 10:00:27] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 10:00:34] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 10:01:00] [ERROR] Error getting enquiry history: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.enquiry_history' doesn't exist
+[2025-11-13 10:01:01] [ERROR] Error updating enquiry status: Enquiry not found or not assigned to you.
+[2025-11-13 10:01:01] [ERROR] Error getting enquiry history: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.enquiry_history' doesn't exist
+[2025-11-13 10:01:08] [ERROR] Error updating enquiry status: Enquiry not found or not assigned to you.
+[2025-11-13 10:01:08] [ERROR] Error getting enquiry history: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.enquiry_history' doesn't exist
+[2025-11-13 10:01:24] [INFO] User logout: ID 2, Username: cc, Role: enquirer, IP: ::1
+[2025-11-13 10:09:52] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 10:10:58] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-13 10:13:00] [INFO] Admin created new user: uu (Role: enquirer)
+[2025-11-13 10:13:49] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-13 10:13:54] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-13 10:16:41] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1

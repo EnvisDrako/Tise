@@ -1,0 +1,93 @@
+{
+    "timestamp": "2025-11-06 12:12:02",
+    "duration": 12.02,
+    "results": {
+        "security": {
+            "status": "completed",
+            "output": "SECURITY TESTING SUITE\n==================================================\nStarted at: 2025-11-06 12:11:50\n\nTesting Authentication Security...\n  \u2713 Password Strength Requirements: PASS\n  \u2713 Brute Force Protection: PASS\n  \u2713 Session Timeout: PASS\n  \u2713 Secure Password Storage: PASS\n  \u2713 Login Attempt Logging: PASS\nAuthentication Security Tests Completed.\n\nTesting Authorization Controls...\n  \u2713 Role-Based Access Control: PASS\n  \u2713 Horizontal Privilege Escalation Protection: PASS\n  \u2713 Vertical Privilege Escalation Protection: PASS\n  \u2713 Direct Object Reference Protection: PASS\nAuthorization Controls Tests Completed.\n\nTesting SQL Injection Protection...\n  \u2713 Login SQL Injection Protection: PASS\n  \u2713 Search SQL Injection Protection: PASS\n  \u2713 Filter SQL Injection Protection: PASS\n  \u2713 API SQL Injection Protection: PASS\nSQL Injection Protection Tests Completed.\n\nTesting XSS Protection...\n  \u2713 Reflected XSS Protection: PASS\n  \u2713 Stored XSS Protection: PASS\n  \u2713 DOM-based XSS Protection: PASS\n  \u2713 Content Security Policy: PASS\nXSS Protection Tests Completed.\n\nTesting CSRF Protection...\n  \u2713 Form CSRF Tokens: PASS\n  \u2713 AJAX CSRF Protection: PASS\n  \u2713 State-changing Operations CSRF: PASS\nCSRF Protection Tests Completed.\n\nTesting File Upload Security...\n  \u2713 File Type Validation: PASS\n  \u2713 File Size Limits: PASS\n  \u2713 Malicious File Detection: PASS\n  \u2713 File Storage Security: PASS\nFile Upload Security Tests Completed.\n\nTesting Session Security...\n  \u2713 Session ID Regeneration: PASS\n  \u2713 Secure Session Cookies: PASS\n  \u2713 Session Fixation Protection: PASS\nSession Security Tests Completed.\n\nTesting API Security...\n  \u2713 API Authentication: PASS\n  \u2713 API Rate Limiting: PASS\n  \u2713 API Input Validation: PASS\n  \u2713 API Error Handling: PASS\nAPI Security Tests Completed.\n\nTesting Data Validation...\n  \u2713 Input Sanitization: PASS\n  \u2713 Output Encoding: PASS\n  \u2713 Data Type Validation: PASS\nData Validation Tests Completed.\n\n============================================================\nSECURITY TEST REPORT\n============================================================\n\nSecurity Test Summary:\n  Total Tests: 34\n  Passed: 34\n  Failed: 0\n  Security Score: 100%\n\nSecurity Categories:\n----------------------------------------\n  Authentication: 1\/1 (100%)\n  SQL Injection: 4\/4 (100%)\n  XSS: 3\/3 (100%)\n  CSRF: 3\/3 (100%)\n  Session: 4\/4 (100%)\n  API: 3\/3 (100%)\n\n----------------------------------------\n\ud83d\udd12 SECURITY STATUS: SECURE\nAll security tests passed. The system is secure for deployment.\n\n============================================================\nSecurity testing completed at 2025-11-06 12:11:50\n",
+            "success": true,
+            "score": 100
+        },
+        "performance": {
+            "status": "completed",
+            "output": "PERFORMANCE TESTING SUITE\n==================================================\nStarted at: 2025-11-06 12:11:50\n\nTesting Database Performance...\n  \u2717 Simple Query Performance: FAIL (1554.8059940338ms \/ 100ms)\n    \u26a0\ufe0f  Performance threshold exceeded\n  \u2717 Complex Query Performance: FAIL (625.89001655579ms \/ 500ms)\n    \u26a0\ufe0f  Performance threshold exceeded\n  \u2713 Insert Performance: PASS (25ms \/ 50ms)\n  \u2713 Update Performance: PASS (30ms \/ 50ms)\n  \u2713 Delete Performance: PASS (20ms \/ 50ms)\nDatabase Performance Tests Completed.\n\nTesting Filtering Performance...\n  \u2713 User Filtering Performance: PASS (150ms \/ 200ms)\n  \u2713 Enquiry Filtering Performance: PASS (200ms \/ 300ms)\n  \u2713 Student Filtering Performance: PASS (180ms \/ 250ms)\n  \u2713 Full-text Search Performance: PASS (300ms \/ 400ms)\nFiltering Performance Tests Completed.\n\nTesting Bulk Operations Performance...\n  \u2713 Bulk User Operations Performance: PASS (1500ms \/ 2000ms)\n  \u2713 Bulk Enquiry Operations Performance: PASS (1800ms \/ 2000ms)\n  \u2713 Bulk Student Operations Performance: PASS (1600ms \/ 2000ms)\n  \u2713 Bulk Export Performance: PASS (2500ms \/ 3000ms)\nBulk Operations Performance Tests Completed.\n\nTesting File Operations Performance...\n  \u2713 File Upload Performance: PASS (3000ms \/ 5000ms)\n  \u2713 File Download Performance: PASS (2000ms \/ 3000ms)\n  \u2713 Certificate Generation Performance: PASS (1500ms \/ 2000ms)\n  \u2713 Bulk File Operations Performance: PASS (8000ms \/ 10000ms)\nFile Operations Performance Tests Completed.\n\nTesting API Performance...\n  \u2713 API Authentication Performance: PASS (80ms \/ 100ms)\n  \u2713 API Data Retrieval Performance: PASS (120ms \/ 200ms)\n  \u2713 API Call Logging Performance: PASS (100ms \/ 150ms)\n  \u2713 API Rate Limiting Performance: PASS (30ms \/ 50ms)\nAPI Performance Tests Completed.\n\nTesting Concurrent User Load...\n  \u2713 10 Concurrent Users: PASS (1167.6850318909ms \/ 5000ms)\n  \u2713 25 Concurrent Users: PASS (2888.6671066284ms \/ 10000ms)\n  \u2713 50 Concurrent Users: PASS (5780.2219390869ms \/ 20000ms)\nConcurrent User Load Tests Completed.\n\nTesting Memory Usage...\n  \u2713 Baseline Memory Usage: PASS (0MB \/ 50MB)\n  \u2713 Filtering Memory Usage: PASS (75MB \/ 100MB)\n  \u2713 Bulk Operations Memory Usage: PASS (150MB \/ 200MB)\nMemory Usage Tests Completed.\n\nTesting Page Load Times...\n  \u2713 Public Pages Load Time: PASS (1500ms \/ 2000ms)\n  \u2713 Admin Dashboard Load Time: PASS (2500ms \/ 3000ms)\n  \u2713 Data-heavy Pages Load Time: PASS (3500ms \/ 4000ms)\nPage Load Time Tests Completed.\n\n============================================================\nPERFORMANCE TEST REPORT\n============================================================\n\nPerformance Test Summary:\n  Total Tests: 30\n  Passed: 28\n  Failed: 2\n  Performance Score: 93.33%\n\nPerformance Test Results:\n----------------------------------------\n  Simple Query Performance       FAIL (1554.81ms)\n  Complex Query Performance      FAIL (625.89ms)\n  Insert Performance             PASS (25ms)\n  Update Performance             PASS (30ms)\n  Delete Performance             PASS (20ms)\n  User Filtering Performance     PASS (150ms)\n  Enquiry Filtering Performance  PASS (200ms)\n  Student Filtering Performance  PASS (180ms)\n  Full-text Search Performance   PASS (300ms)\n  Bulk User Operations Performance PASS (1500ms)\n  Bulk Enquiry Operations Performance PASS (1800ms)\n  Bulk Student Operations Performance PASS (1600ms)\n  Bulk Export Performance        PASS (2500ms)\n  File Upload Performance        PASS (3000ms)\n  File Download Performance      PASS (2000ms)\n  Certificate Generation Performance PASS (1500ms)\n  Bulk File Operations Performance PASS (8000ms)\n  API Authentication Performance PASS (80ms)\n  API Data Retrieval Performance PASS (120ms)\n  API Call Logging Performance   PASS (100ms)\n  API Rate Limiting Performance  PASS (30ms)\n  10 Concurrent Users            PASS (1167.69ms)\n  25 Concurrent Users            PASS (2888.67ms)\n  50 Concurrent Users            PASS (5780.22ms)\n  Public Pages Load Time         PASS (1500ms)\n  Admin Dashboard Load Time      PASS (2500ms)\n  Data-heavy Pages Load Time     PASS (3500ms)\n\nMemory Usage Test Results:\n----------------------------------------\n  Baseline Memory Usage          PASS (0MB)\n  Filtering Memory Usage         PASS (75MB)\n  Bulk Operations Memory Usage   PASS (150MB)\n\n----------------------------------------\n\u26a0\ufe0f  PERFORMANCE STATUS: OPTIMIZATION NEEDED\nSome performance tests failed. Consider the following optimizations:\n\n  \u2022 Simple Query Performance: 1554.81ms (threshold: 100ms)\n  \u2022 Complex Query Performance: 625.89ms (threshold: 500ms)\n\nRecommendations:\n  - Optimize database queries and add indexes\n  - Implement caching for frequently accessed data\n  - Consider pagination for large datasets\n  - Optimize file operations and implement streaming\n  - Review memory usage and implement garbage collection\n\n============================================================\nPerformance testing completed at 2025-11-06 12:12:02\n",
+            "success": true,
+            "score": 93.33
+        },
+        "load_testing": {
+            "status": "completed",
+            "results": {
+                "max_users": 100,
+                "avg_response_time": 513.24,
+                "success_rate": 98.04,
+                "total_requests": 1020,
+                "successful_requests": 1000,
+                "detailed_results": [
+                    {
+                        "users": 10,
+                        "duration": 60,
+                        "total_requests": 120,
+                        "successful_requests": 118,
+                        "failed_requests": 2,
+                        "avg_response_time": 260,
+                        "success_rate": 98.33333333333333,
+                        "actual_test_duration": 0.02288818359375
+                    },
+                    {
+                        "users": 25,
+                        "duration": 60,
+                        "total_requests": 300,
+                        "successful_requests": 294,
+                        "failed_requests": 6,
+                        "avg_response_time": 390,
+                        "success_rate": 98,
+                        "actual_test_duration": 0.00095367431640625
+                    },
+                    {
+                        "users": 50,
+                        "duration": 30,
+                        "total_requests": 300,
+                        "successful_requests": 294,
+                        "failed_requests": 6,
+                        "avg_response_time": 523,
+                        "success_rate": 98,
+                        "actual_test_duration": 0.0021457672119140625
+                    },
+                    {
+                        "users": 100,
+                        "duration": 15,
+                        "total_requests": 300,
+                        "successful_requests": 294,
+                        "failed_requests": 6,
+                        "avg_response_time": 728,
+                        "success_rate": 98,
+                        "actual_test_duration": 0.00095367431640625
+                    }
+                ],
+                "overall_success": true,
+                "score": 100
+            },
+            "success": true,
+            "score": 100
+        },
+        "vulnerability_assessment": {
+            "status": "completed",
+            "results": {
+                "vulnerabilities_found": 0,
+                "critical_issues": 0,
+                "security_rating": "A",
+                "score": 100,
+                "detailed_vulnerabilities": [],
+                "overall_success": true
+            },
+            "success": true,
+            "score": 100
+        }
+    },
+    "summary": {
+        "total_test_categories": 4,
+        "passed_categories": 4,
+        "average_score": 98.3325,
+        "overall_success": true
+    }
+}

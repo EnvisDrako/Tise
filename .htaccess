@@ -1,0 +1,34 @@
+# Root .htaccess - Redirect to Public Directory
+# Ensures all requests go to the public directory
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Redirect everything to public/ except if already there
+RewriteCond %{REQUEST_URI} !^/integrated-crm/public/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/$1 [L]
+
+# Redirect root directly to public/
+RewriteRule ^$ public/ [L]
+</IfModule>
+
+# ---------------------------------------------------
+# SECURITY BLOCKS
+# ---------------------------------------------------
+
+# Block sensitive directories
+RewriteRule ^includes/ - [F,L]
+RewriteRule ^database/ - [F,L]
+RewriteRule ^logs/     - [F,L]
+RewriteRule ^tests/    - [F,L]
+RewriteRule ^docs/     - [F,L]
+
+# Block access to sensitive and backup files
+<FilesMatch "(\.php~|config\.php|\.log)$">
+    Require all denied
+</FilesMatch>
+
+# Disable directory indexing
+Options -Indexes

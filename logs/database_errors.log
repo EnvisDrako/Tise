@@ -1,0 +1,7 @@
+[2025-11-06 14:20:44] Database connection failed: could not find driver
+[2025-11-06 17:36:48] Database connection failed: could not find driver
+[2025-11-13 03:19:36] Database connection failed: could not find driver
+[2025-11-13 05:01:02] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notes' in 'field list' | Query: UPDATE enquiries SET status = ?, notes = ? WHERE id = ?
+[2025-11-13 05:01:11] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notes' in 'field list' | Query: UPDATE enquiries SET status = ?, notes = ? WHERE id = ?
+[2025-11-13 09:44:34] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notes' in 'field list' | Query: UPDATE enquiries SET status = ?, notes = ? WHERE id = ?
+[2025-11-13 10:00:54] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notes' in 'field list' | Query: UPDATE enquiries SET status = ?, notes = ? WHERE id = ?

@@ -1,0 +1,7 @@
+# Deny all access to includes directory
+Require all denied
+
+# Additional security - block everything inside this folder
+<FilesMatch ".*">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Disallow private portal areas
+Disallow: /admin/
+Disallow: /institution/
+Disallow: /enquiry/
+Disallow: /api/
+Disallow: /login
+Disallow: /login_process
+Disallow: /logout
+
+# Disallow upload directories for security
+Disallow: /uploads/
+
+# Allow public CSS, JS, and images
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Sitemap location
+Sitemap: https://eduportal.com/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
