@@ -201,6 +201,8 @@ INSERT INTO institutions (name, code, address, phone, email, established_date) V
 INSERT INTO users (username, password_hash, role, institution_id, full_name, email, phone) VALUES
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 1, 'System Administrator', 'admin@system.com', '0000000000');
 
+UPDATE users SET password_hash = '$2y$10$GxY9y0vnsovwwc6Ks/kg8uW1Qu7VGI4r.DtdPCTweKexBxN04qAMm' WHERE username = 'admin';
+
 -- Create a view for user management with institution details
 CREATE VIEW user_details AS
 SELECT 
