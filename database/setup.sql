@@ -2,8 +2,8 @@
 -- This script creates all tables, indexes, and relationships for the system
 
 -- Create database (uncomment if needed)
-CREATE DATABASE integrated_crm_portal CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE integrated_crm_portal;
+CREATE DATABASE integrated_crm CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE integrated_crm;
 
 -- Drop tables if they exist (for clean setup)
 DROP TABLE IF EXISTS call_logs;
@@ -13,6 +13,15 @@ DROP TABLE IF EXISTS enquiries;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS institutions;
+DROP TABLE IF EXISTS newsletter_subscribers;
+DROP TABLE IF EXISTS social_share_analytics;
+DROP TABLE IF EXISTS certificate_audit_log;
+DROP TABLE IF EXISTS system_exports;
+DROP TABLE IF EXISTS scheduled_exports;
+DROP TABLE IF EXISTS data_retention_policies;
+DROP TABLE IF EXISTS deletion_audit_log;
+DROP TABLE IF EXISTS bulk_operations;
+DROP TABLE IF EXISTS archived_data;
 
 -- Create institutions table
 CREATE TABLE institutions (
@@ -192,6 +201,8 @@ INSERT INTO institutions (name, code, address, phone, email, established_date) V
 INSERT INTO users (username, password_hash, role, institution_id, full_name, email, phone) VALUES
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 1, 'System Administrator', 'admin@system.com', '0000000000');
 
+UPDATE users SET password_hash = '$2y$10$GxY9y0vnsovwwc6Ks/kg8uW1Qu7VGI4r.DtdPCTweKexBxN04qAMm' WHERE username = 'admin';
+
 -- Create a view for user management with institution details
 CREATE VIEW user_details AS
 SELECT 
@@ -226,8 +237,9 @@ SELECT
     u.full_name as registered_by_name
 FROM students s
 JOIN institutions i ON s.institution_id = i.id
-JOIN users u ON s.registered_by = u.id;-- Newsle
+JOIN users u ON s.registered_by = u.id;
 
+-- Newsletter subscribers table for SEO and social media integration
 CREATE TABLE newsletter_subscribers (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -412,15 +424,12 @@ INSERT INTO data_retention_policies (data_type, retention_days, archive_before_d
 ('marklists', 3650, TRUE, FALSE, TRUE, 1),  -- 10 years for marklists
 ('system_exports', 30, FALSE, TRUE, FALSE, 1);  -- 30 days for exports
 
--- Create indexes for better performance on large datasets
+-- Additional indexes for better performance on large datasets
 CREATE INDEX idx_users_created_at ON users(created_at);
 CREATE INDEX idx_users_role_institution ON users(role, institution_id);
 CREATE INDEX idx_students_created_at ON students(created_at);
-CREATE INDEX idx_students_institution_course ON students(institution_id, course);
 CREATE INDEX idx_enquiries_created_at ON enquiries(created_at);
-CREATE INDEX idx_enquiries_status_assigned ON enquiries(status, assigned_to_user_id);
 CREATE INDEX idx_certificates_created_at ON certificate_requests(requested_at);
-CREATE INDEX idx_certificates_institution_status ON certificate_requests(institution_id, status);
 CREATE INDEX idx_call_logs_timestamp ON call_logs(call_timestamp);
 CREATE INDEX idx_marklists_created_at ON marklists(created_at);
 
@@ -593,83 +602,3 @@ BEGIN
 END //
 
 DELIMITER ;
--- Bulk
- Operations and Data Management Tables
-
--- Retention policies configuration
-CREATE TABLE IF NOT EXISTS retention_policies (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    data_type VARCHAR(50) UNIQUE NOT NULL,
-    retention_days INT NOT NULL DEFAULT 365,
-    archive_before_delete BOOLEAN DEFAULT TRUE,
-    auto_delete BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
--- Deletion log for audit trail
-CREATE TABLE IF NOT EXISTS deletion_log (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    data_type VARCHAR(50) NOT NULL,
-    records_count INT NOT NULL,
-    status ENUM('pending', 'completed', 'failed', 'archived') DEFAULT 'pending',
-    can_rollback BOOLEAN DEFAULT TRUE,
-    archive_path VARCHAR(255),
-    deleted_by INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    completed_at TIMESTAMP NULL,
-    FOREIGN KEY (deleted_by) REFERENCES users(id),
-    INDEX idx_data_type (data_type),
-    INDEX idx_status (status),
-    INDEX idx_created_at (created_at)
-);
-
--- Archived data tracking
-CREATE TABLE IF NOT EXISTS archived_data (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    data_type VARCHAR(50) NOT NULL,
-    records_count INT NOT NULL,
-    file_size BIGINT NOT NULL,
-    archive_path VARCHAR(255) NOT NULL,
-    compression_type VARCHAR(20) DEFAULT 'zip',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_data_type (data_type),
-    INDEX idx_created_at (created_at)
-);
-
--- Bulk operations management
-CREATE TABLE IF NOT EXISTS bulk_operations (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    operation_name VARCHAR(255) NOT NULL,
-    operation_type ENUM('delete', 'archive', 'export', 'update', 'cleanup') NOT NULL,
-    data_type VARCHAR(50) NOT NULL,
-    description TEXT,
-    status ENUM('scheduled', 'running', 'paused', 'completed', 'failed', 'cancelled') DEFAULT 'scheduled',
-    total_records INT DEFAULT 0,
-    processed_records INT DEFAULT 0,
-    progress_percentage DECIMAL(5,2) DEFAULT 0,
-    operation_config JSON,
-    result_file_path VARCHAR(500),
-    error_message TEXT,
-    created_by INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    scheduled_at TIMESTAMP NULL,
-    started_at TIMESTAMP NULL,
-    completed_at TIMESTAMP NULL,
-    estimated_records INT DEFAULT 0,
-    FOREIGN KEY (created_by) REFERENCES users(id),
-    INDEX idx_status (status),
-    INDEX idx_created_by (created_by),
-    INDEX idx_scheduled_at (scheduled_at),
-    INDEX idx_operation_type (operation_type),
-    INDEX idx_data_type (data_type)
-);
-
--- Insert default retention policies
-INSERT IGNORE INTO retention_policies (data_type, retention_days, archive_before_delete, auto_delete) VALUES
-('users', 2555, TRUE, FALSE),           -- 7 years
-('enquiries', 1095, TRUE, FALSE),       -- 3 years  
-('students', 3650, TRUE, FALSE),        -- 10 years
-('certificate_requests', 1825, TRUE, FALSE), -- 5 years
-('call_logs', 365, TRUE, TRUE),         -- 1 year with auto-delete
-('marklists', 3650, TRUE, FALSE);       -- 10 years

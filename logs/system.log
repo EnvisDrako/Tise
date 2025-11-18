@@ -74,3 +74,5 @@
 [2025-11-13 10:16:41] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
             FROM enquiries 
             WHERE assigned_to_us...' at line 1
+[2025-11-14 03:26:47] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-14 10:56:58] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
