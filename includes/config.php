@@ -12,8 +12,9 @@ if (!defined('SYSTEM_ACCESS')) {
 // Auto detect base URL
 $serverName = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
 if ($serverName === 'localhost' || php_sapi_name() === 'cli') {
-    define('BASE_URL', '/integrated-crm/public');
-    define('SITE_URL', 'http://localhost/integrated-crm/public');
+    // --- FIXED: Point to your 'Tise' folder ---
+    define('BASE_URL', '/Tise/public');
+    define('SITE_URL', 'http://localhost/Tise/public');
 } else {
     define('BASE_URL', ''); // live server root
     define('SITE_URL', 'https://' . $serverName);
@@ -21,9 +22,10 @@ if ($serverName === 'localhost' || php_sapi_name() === 'cli') {
 
 // Database configuration for local development
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'integrated_crm');
+// --- FIXED: Use the correct database name ---
+define('DB_NAME', 'integrated_crm'); 
 define('DB_USER', 'root');  // Default XAMPP MySQL user
-define('DB_PASS', '');      // Default XAMPP MySQL password (empty)
+define('DB_PASS', 'root');      // Default XAMPP MySQL password (empty)
 define('DB_CHARSET', 'utf8mb4');
 
 // System configuration
