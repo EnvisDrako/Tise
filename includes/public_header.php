@@ -2,10 +2,10 @@
 require_once __DIR__ . "/config.php";
 require_once __DIR__ . "/functions.php";
 // Public website header with SEO optimization
-$site_name = "EduPortal - Educational Institution";
-$site_url = "https://eduportal.com";
+$site_name = "Taset Academy";
+$site_url = SITE_URL;
 $default_image = "/images/og-default.jpg";
-$twitter_handle = "@eduportal";
+$twitter_handle = "@tasetacademy";
 
 // Set default values if not provided
 $page_title = isset($page_title) ? $page_title : 'Home';
@@ -21,8 +21,8 @@ $structured_data = [
     "@type" => "EducationalOrganization",
     "name" => $site_name,
     "url" => $site_url,
-    "logo" => $site_url . "/images/logo.png",
-    "description" => "Leading educational institution committed to excellence in education and training",
+    "logo" => $site_url . "/images/logos/logo.png",
+    "description" => "Taset Academy - Leading educational institution committed to excellence in education and training",
     "address" => [
         "@type" => "PostalAddress",
         "streetAddress" => "123 Education Street",
@@ -113,7 +113,10 @@ if (isset($course_data) && is_array($course_data)) {
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <a href="<?php echo url('/'); ?>"><i class="fas fa-graduation-cap"></i> EduPortal</a>
+                    <a href="<?php echo url('/'); ?>">
+                        <img src="<?php echo asset('images/logos/logo.png'); ?>" alt="Taset Academy" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                        <span style="display:none;"><i class="fas fa-graduation-cap"></i> Taset Academy</span>
+                    </a>
                 </div>
                 <div class="nav-menu" id="nav-menu">
                     <a href="<?php echo url('/'); ?>" class="nav-link">Home</a>

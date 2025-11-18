@@ -46,30 +46,33 @@
 
     <!-- Print-only header -->
     <div class="print-header print-only" style="display: none;">
-        <h1>EduPortal - Educational Institution</h1>
+        <h1>Taset Academy</h1>
         <p>Leading educational institution committed to excellence in education and training</p>
-        <p>Website: https://eduportal.com | Email: info@eduportal.com | Phone: +1 234 567 8900</p>
+        <p>Website: <?php echo SITE_URL; ?> | Email: info@tasetacademy.com | Phone: +1 234 567 8900</p>
     </div>
     
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3><i class="fas fa-graduation-cap"></i> EduPortal</h3>
+                <h3>
+                    <img src="<?php echo asset('images/logos/logo-white.png'); ?>" alt="Taset Academy" class="footer-logo" style="height: 40px; vertical-align: middle;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <span style="display:none;"><i class="fas fa-graduation-cap"></i> Taset Academy</span>
+                </h3>
                 <p>Leading educational institution committed to excellence in education and training.</p>
                 <div class="social-links">
-                    <a href="https://facebook.com/eduportal" target="_blank" rel="noopener" aria-label="Follow us on Facebook">
+                    <a href="https://facebook.com/tasetacademy" target="_blank" rel="noopener" aria-label="Follow us on Facebook">
                         <i class="fab fa-facebook"></i>
                     </a>
-                    <a href="https://twitter.com/eduportal" target="_blank" rel="noopener" aria-label="Follow us on Twitter">
+                    <a href="https://twitter.com/tasetacademy" target="_blank" rel="noopener" aria-label="Follow us on Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="https://linkedin.com/company/eduportal" target="_blank" rel="noopener" aria-label="Connect with us on LinkedIn">
+                    <a href="https://linkedin.com/company/tasetacademy" target="_blank" rel="noopener" aria-label="Connect with us on LinkedIn">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="https://instagram.com/eduportal" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
+                    <a href="https://instagram.com/tasetacademy" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://youtube.com/eduportal" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
+                    <a href="https://youtube.com/tasetacademy" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </div>
@@ -109,7 +112,7 @@
                 <h4>Contact Info</h4>
                 <div class="contact-info">
                     <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
-                    <p><i class="fas fa-envelope"></i> info@eduportal.com</p>
+                    <p><i class="fas fa-envelope"></i> info@tasetacademy.com</p>
                     <p><i class="fas fa-map-marker-alt"></i> 123 Education Street, Knowledge City</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM, Sat: 9AM-2PM</p>
                 </div>
@@ -124,7 +127,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-bottom-content">
-                <p>&copy; <?php echo date('Y'); ?> EduPortal. All rights reserved.</p>
+                <p>&copy; <?php echo date('Y'); ?> Taset Academy. All rights reserved.</p>
                 <div class="footer-links">
                     <a href="<?php echo url('terms'); ?>">Terms of Service</a>
                     <a href="<?php echo url('privacy-policy'); ?>">Privacy Policy</a>
