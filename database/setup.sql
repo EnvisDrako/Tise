@@ -65,6 +65,8 @@ CREATE TABLE students (
     address TEXT,
     course VARCHAR(100),
     batch_year YEAR,
+    enrollment_date DATE NULL,   ----  new line 
+    status ENUM('active', 'graduated', 'suspended', 'withdrawn') DEFAULT 'active',   ----  new line 
     photo_path VARCHAR(255),
     is_exam_eligible BOOLEAN DEFAULT FALSE,
     registered_by INT NOT NULL,
