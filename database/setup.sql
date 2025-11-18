@@ -359,7 +359,7 @@ CREATE TABLE deletion_audit_log (
     record_id INT NOT NULL,
     record_data JSON,
     reason TEXT,
-    performed_by INT NOT NULL,
+    performed_by INT NULL,
     performed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     rollback_data JSON NULL,
     can_rollback BOOLEAN DEFAULT FALSE,

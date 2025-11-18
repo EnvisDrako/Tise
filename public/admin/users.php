@@ -153,9 +153,7 @@ if (isset($_GET['export'])) {
         case 'excel':
             exportUsersExcel($users);
             break;
-        case 'pdf':
-            exportUsersPDF($users);
-            break;
+        // REMOVED: case 'pdf'
     }
     exit;
 }
@@ -214,7 +212,6 @@ renderAdminHeader($pageTitle);
     </div>
 <?php endif; ?>
 
-<!-- Filters and Search -->
 <div class="row mb-4">
     <div class="col-12">
         <div class="filter-section">
@@ -273,7 +270,6 @@ renderAdminHeader($pageTitle);
     </div>
 </div>
 
-<!-- Bulk Actions and Export -->
 <div class="row mb-3">
     <div class="col-md-6">
         <form method="POST" id="bulkActionForm" class="d-flex gap-2 align-items-end">
@@ -304,15 +300,11 @@ renderAdminHeader($pageTitle);
                 <li><a class="dropdown-item" href="#" onclick="exportUsers('excel')">
                     <i class="fas fa-file-excel"></i> Export Excel
                 </a></li>
-                <li><a class="dropdown-item" href="#" onclick="exportUsers('pdf')">
-                    <i class="fas fa-file-pdf"></i> Export PDF
-                </a></li>
-            </ul>
+                </ul>
         </div>
     </div>
 </div>
 
-<!-- Users Table -->
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -438,7 +430,6 @@ renderAdminHeader($pageTitle);
                         </table>
                     </div>
                     
-                    <!-- Pagination -->
                     <?php if ($pagination['total_pages'] > 1): ?>
                         <nav aria-label="Users pagination" class="mt-3">
                             <ul class="pagination justify-content-center">
@@ -472,8 +463,8 @@ renderAdminHeader($pageTitle);
             </div>
         </div>
     </div>
-</div><!-- Cre
-ate User Modal -->
+</div>
+
 <div class="modal fade" id="createUserModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -548,7 +539,6 @@ ate User Modal -->
     </div>
 </div>
 
-<!-- Edit User Modal -->
 <div class="modal fade" id="editUserModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -569,7 +559,7 @@ ate User Modal -->
                             <input type="text" name="username" id="edit_username" class="form-control" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="edit_password" class="form-label">New Password</label>
+                            <label for="edit_password" class="form-label">New Password</label
                             <input type="password" name="password" id="edit_password" class="form-control" 
                                    placeholder="Leave blank to keep current password">
                         </div>
@@ -785,7 +775,7 @@ function getFilteredUsers($filters = [], $sort_by = 'created_at', $sort_order = 
         $params[] = $filters['institution_id'];
     }
     
-    if (isset($filters['is_active'])) {
+    if (isset($filters['is_active']) && $filters['is_active'] !== '') {
         $whereConditions[] = "u.is_active = ?";
         $params[] = $filters['is_active'];
     }
@@ -838,7 +828,7 @@ function getUserCount($filters = []) {
         $params[] = $filters['institution_id'];
     }
     
-    if (isset($filters['is_active'])) {
+    if (isset($filters['is_active']) && $filters['is_active'] !== '') {
         $whereConditions[] = "is_active = ?";
         $params[] = $filters['is_active'];
     }
@@ -909,35 +899,6 @@ function exportUsersExcel($users) {
     }
     
     echo '</table>';
-}
-
-function exportUsersPDF($users) {
-    // Simple HTML-based PDF export
-    header('Content-Type: application/pdf');
-    header('Content-Disposition: attachment; filename="users_export_' . date('Y-m-d') . '.pdf"');
-    
-    // For now, output HTML that can be printed to PDF
-    echo '<!DOCTYPE html><html><head><title>Users Export</title>';
-    echo '<style>table{width:100%;border-collapse:collapse;}th,td{border:1px solid #ddd;padding:8px;text-align:left;}th{background-color:#f2f2f2;}</style>';
-    echo '</head><body>';
-    echo '<h1>Users Export - ' . date('Y-m-d') . '</h1>';
-    echo '<table>';
-    echo '<tr><th>ID</th><th>Username</th><th>Full Name</th><th>Email</th><th>Role</th><th>Institution</th><th>Status</th><th>Created</th></tr>';
-    
-    foreach ($users as $user) {
-        echo '<tr>';
-        echo '<td>' . htmlspecialchars($user['id']) . '</td>';
-        echo '<td>' . htmlspecialchars($user['username']) . '</td>';
-        echo '<td>' . htmlspecialchars($user['full_name']) . '</td>';
-        echo '<td>' . htmlspecialchars($user['email']) . '</td>';
-        echo '<td>' . htmlspecialchars($user['role']) . '</td>';
-        echo '<td>' . htmlspecialchars($user['institution_name'] ?: 'N/A') . '</td>';
-        echo '<td>' . ($user['is_active'] ? 'Active' : 'Inactive') . '</td>';
-        echo '<td>' . htmlspecialchars(date('Y-m-d', strtotime($user['created_at']))) . '</td>';
-        echo '</tr>';
-    }
-    
-    echo '</table></body></html>';
 }
 
 renderAdminFooter();

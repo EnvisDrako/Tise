@@ -96,3 +96,5 @@
             INSERT INTO students (student_id, full_name, email, phone, course, batch_year, institution_id, enrollment_date, status, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
         
+[2025-11-18 07:33:00] Query execution failed: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'performed_by' cannot be null | Query: DELETE FROM users WHERE id IN (?)
+[2025-11-18 07:33:48] Query execution failed: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'performed_by' cannot be null | Query: DELETE FROM users WHERE id IN (?)
