@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         case 'assign':
                             $assigned_to = (int)$_POST['bulk_assigned_to'];
                             executeQuery("UPDATE enquiries SET assigned_to_user_id = ?, status = 'assigned' WHERE id IN ({$placeholders})", 
-                                       array_merge([$assigned_to], $selected_enquiries));
+                                         array_merge([$assigned_to], $selected_enquiries));
                             $success_message = count($selected_enquiries) . " enquiries assigned successfully!";
                             break;
                         case 'status_new':
@@ -116,9 +116,7 @@ if (isset($_GET['export'])) {
         case 'excel':
             exportEnquiriesExcel($enquiries);
             break;
-        case 'pdf':
-            exportEnquiriesPDF($enquiries);
-            break;
+        // REMOVED: case 'pdf'
     }
     exit;
 }
@@ -196,7 +194,6 @@ renderAdminHeader($pageTitle);
     </div>
 <?php endif; ?>
 
-<!-- Enquiry Statistics -->
 <div class="row mb-4">
     <div class="col-md-2">
         <div class="card bg-primary text-white">
@@ -248,7 +245,6 @@ renderAdminHeader($pageTitle);
     </div>
 </div>
 
-<!-- Filters and Search -->
 <div class="row mb-4">
     <div class="col-12">
         <div class="filter-section">
@@ -325,7 +321,6 @@ renderAdminHeader($pageTitle);
     </div>
 </div>
 
-<!-- Bulk Actions and Export -->
 <div class="row mb-3">
     <div class="col-md-8">
         <form method="POST" id="bulkActionForm" class="d-flex gap-2 align-items-end flex-wrap">
@@ -377,15 +372,11 @@ renderAdminHeader($pageTitle);
                 <li><a class="dropdown-item" href="#" onclick="exportEnquiries('excel')">
                     <i class="fas fa-file-excel"></i> Export Excel
                 </a></li>
-                <li><a class="dropdown-item" href="#" onclick="exportEnquiries('pdf')">
-                    <i class="fas fa-file-pdf"></i> Export PDF
-                </a></li>
-            </ul>
+                </ul>
         </div>
     </div>
 </div>
 
-<!-- Enquiries Table -->
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -528,7 +519,6 @@ renderAdminHeader($pageTitle);
                         </table>
                     </div>
                     
-                    <!-- Pagination -->
                     <?php if ($pagination['total_pages'] > 1): ?>
                         <nav aria-label="Enquiries pagination" class="mt-3">
                             <ul class="pagination justify-content-center">
@@ -564,7 +554,6 @@ renderAdminHeader($pageTitle);
     </div>
 </div>
 
-<!-- View Enquiry Modal -->
 <div class="modal fade" id="viewEnquiryModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -575,8 +564,7 @@ renderAdminHeader($pageTitle);
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body" id="enquiryDetails">
-                <!-- Content loaded via JavaScript -->
-            </div>
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
@@ -584,7 +572,6 @@ renderAdminHeader($pageTitle);
     </div>
 </div>
 
-<!-- Assign Enquiry Modal -->
 <div class="modal fade" id="assignEnquiryModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -629,7 +616,6 @@ renderAdminHeader($pageTitle);
     </div>
 </div>
 
-<!-- Update Status Modal -->
 <div class="modal fade" id="updateStatusModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -1064,32 +1050,7 @@ function exportEnquiriesExcel($enquiries) {
     echo '</table>';
 }
 
-function exportEnquiriesPDF($enquiries) {
-    header('Content-Type: application/pdf');
-    header('Content-Disposition: attachment; filename="enquiries_export_' . date('Y-m-d') . '.pdf"');
-    
-    echo '<!DOCTYPE html><html><head><title>Enquiries Export</title>';
-    echo '<style>table{width:100%;border-collapse:collapse;}th,td{border:1px solid #ddd;padding:8px;text-align:left;}th{background-color:#f2f2f2;}</style>';
-    echo '</head><body>';
-    echo '<h1>Enquiries Export - ' . date('Y-m-d') . '</h1>';
-    echo '<table>';
-    echo '<tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Course</th><th>Status</th><th>Assigned To</th><th>Submitted</th></tr>';
-    
-    foreach ($enquiries as $enquiry) {
-        echo '<tr>';
-        echo '<td>' . htmlspecialchars($enquiry['id']) . '</td>';
-        echo '<td>' . htmlspecialchars($enquiry['full_name']) . '</td>';
-        echo '<td>' . htmlspecialchars($enquiry['email']) . '</td>';
-        echo '<td>' . htmlspecialchars($enquiry['phone']) . '</td>';
-        echo '<td>' . htmlspecialchars($enquiry['course_interest']) . '</td>';
-        echo '<td>' . htmlspecialchars($enquiry['status']) . '</td>';
-        echo '<td>' . htmlspecialchars($enquiry['assigned_to_name'] ?: 'Unassigned') . '</td>';
-        echo '<td>' . htmlspecialchars(date('Y-m-d', strtotime($enquiry['created_at']))) . '</td>';
-        echo '</tr>';
-    }
-    
-    echo '</table></body></html>';
-}
+// REMOVED: exportEnquiriesPDF function
 
 renderAdminFooter();
 ?>

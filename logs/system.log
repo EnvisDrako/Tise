@@ -117,3 +117,13 @@
 [2025-11-18 02:03:11] [ERROR] Error adding student: Database operation failed
 [2025-11-18 02:03:30] [ERROR] Error adding student: Database operation failed
 [2025-11-18 02:06:54] [INFO] Admin added student: Harisankar G (ID: STU001)
+[2025-11-18 07:33:00] [ERROR] Error in user management: Database operation failed
+[2025-11-18 07:33:48] [ERROR] Error in user management: Database operation failed
+[2025-11-18 08:34:32] [INFO] Admin performed bulk action 'delete' on 1 users
+[2025-11-18 08:34:43] [INFO] Admin performed bulk action 'delete' on 1 users
+[2025-11-18 08:34:50] [INFO] Admin deleted institution ID: 3
+[2025-11-18 08:41:41] [INFO] Admin performed bulk action 'delete' on 1 enquiries
+[2025-11-18 08:41:53] [INFO] Admin performed bulk action 'delete' on 1 students
+[2025-11-18 09:11:41] [INFO] Admin imported 1 students via CSV
+[2025-11-18 09:12:10] [INFO] Admin imported 2 students via CSV
+[2025-11-18 09:12:36] [INFO] Admin imported 2 enquiries via CSV
