@@ -88,3 +88,56 @@
             FROM enquiries 
             WHERE assigned_to_us...' at line 1
 [2025-11-18 06:09:54] [INFO] User logout: ID 2, Username: a, Role: enquirer, IP: ::1
+[2025-11-15 02:18:53] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-15 02:18:58] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-15 02:19:02] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-15 02:20:01] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:04] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:07] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:14] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:19] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:24] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:28] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:37] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:20:52] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:21:00] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:21:12] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:21:45] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:21:49] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:21:55] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:22:04] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-15 02:22:07] [WARNING] Unauthorized access attempt to enquirer area by user ID: 1 (Role: admin), IP: ::1
+[2025-11-18 00:06:32] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-18 00:06:48] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-18 00:06:53] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-18 00:20:18] [INFO] Admin created new institution: VIT (Code: BHOPAL466)
+[2025-11-18 00:20:27] [INFO] Admin updated institution ID: 2
+[2025-11-18 00:20:42] [INFO] Admin updated institution ID: 2
+[2025-11-18 00:22:58] [ERROR] Error adding student: Database operation failed
+[2025-11-18 00:25:03] [INFO] Admin imported 0 students via CSV
+[2025-11-18 00:26:37] [INFO] Admin imported 0 students via CSV
+[2025-11-18 00:27:22] [INFO] Admin imported 0 students via CSV
+[2025-11-18 00:30:05] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:32:53] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:34:09] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:34:12] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:34:25] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:39:41] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:39:54] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:51:29] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:51:36] [ERROR] Error adding student: Database operation failed
+[2025-11-18 01:51:49] [ERROR] Error adding student: Database operation failed
+[2025-11-18 02:03:06] [ERROR] Error adding student: Database operation failed
+[2025-11-18 02:03:11] [ERROR] Error adding student: Database operation failed
+[2025-11-18 02:03:30] [ERROR] Error adding student: Database operation failed
+[2025-11-18 02:06:54] [INFO] Admin added student: Harisankar G (ID: STU001)
+[2025-11-18 07:33:00] [ERROR] Error in user management: Database operation failed
+[2025-11-18 07:33:48] [ERROR] Error in user management: Database operation failed
+[2025-11-18 08:34:32] [INFO] Admin performed bulk action 'delete' on 1 users
+[2025-11-18 08:34:43] [INFO] Admin performed bulk action 'delete' on 1 users
+[2025-11-18 08:34:50] [INFO] Admin deleted institution ID: 3
+[2025-11-18 08:41:41] [INFO] Admin performed bulk action 'delete' on 1 enquiries
+[2025-11-18 08:41:53] [INFO] Admin performed bulk action 'delete' on 1 students
+[2025-11-18 09:11:41] [INFO] Admin imported 1 students via CSV
+[2025-11-18 09:12:10] [INFO] Admin imported 2 students via CSV
+[2025-11-18 09:12:36] [INFO] Admin imported 2 enquiries via CSV

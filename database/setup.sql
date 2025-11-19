@@ -65,6 +65,8 @@ CREATE TABLE students (
     address TEXT,
     course VARCHAR(100),
     batch_year YEAR,
+    enrollment_date DATE NULL,   ----  new line 
+    status ENUM('active', 'graduated', 'suspended', 'withdrawn') DEFAULT 'active',   ----  new line 
     photo_path VARCHAR(255),
     is_exam_eligible BOOLEAN DEFAULT FALSE,
     registered_by INT NOT NULL,
@@ -357,7 +359,7 @@ CREATE TABLE deletion_audit_log (
     record_id INT NOT NULL,
     record_data JSON,
     reason TEXT,
-    performed_by INT NOT NULL,
+    performed_by INT NULL,
     performed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     rollback_data JSON NULL,
     can_rollback BOOLEAN DEFAULT FALSE,

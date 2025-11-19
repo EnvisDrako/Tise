@@ -10,6 +10,9 @@ $pageTitle = 'Add Student';
 $success_message = '';
 $error_message = '';
 
+// Helper to get the current logged-in admin ID safely
+$current_user_id = $_SESSION['user_id'] ?? 1; // Default to 1 if session is missing
+
 // Handle manual student addition
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_student') {
     try {
@@ -34,11 +37,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             throw new Exception("Student ID already exists.");
         }
         
-        // Insert student
+        // Insert student (WITH registered_by)
         executeQuery("
-            INSERT INTO students (student_id, full_name, email, phone, course, batch_year, institution_id, enrollment_date, status, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
-        ", [$student_id, $full_name, $email, $phone, $course, $batch_year, $institution_id, $enrollment_date, $status]);
+            INSERT INTO students (
+                student_id, full_name, email, phone, course, batch_year, 
+                institution_id, enrollment_date, status, registered_by, created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ", [
+            $student_id, $full_name, $email, $phone, $course, $batch_year, 
+            $institution_id, $enrollment_date, $status, $current_user_id
+        ]);
         
         $success_message = "Student added successfully!";
         logEvent("Admin added student: {$full_name} (ID: {$student_id})", 'INFO');
@@ -98,11 +107,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     continue;
                 }
                 
-                // Insert student
+                // Insert student (WITH registered_by)
                 executeQuery("
-                    INSERT INTO students (student_id, full_name, email, phone, course, batch_year, institution_id, enrollment_date, status, created_at)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
-                ", [$student_id, $full_name, $email, $phone, $course, $batch_year, $institution_id, $enrollment_date, $status]);
+                    INSERT INTO students (
+                        student_id, full_name, email, phone, course, batch_year, 
+                        institution_id, enrollment_date, status, registered_by, created_at
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+                ", [
+                    $student_id, $full_name, $email, $phone, $course, $batch_year, 
+                    $institution_id, $enrollment_date, $status, $current_user_id
+                ]);
                 
                 $imported++;
                 
@@ -159,7 +174,6 @@ renderAdminHeader($pageTitle);
 <?php endif; ?>
 
 <div class="row">
-    <!-- Manual Entry Form -->
     <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-primary text-white">
@@ -237,7 +251,6 @@ renderAdminHeader($pageTitle);
         </div>
     </div>
     
-    <!-- CSV Import -->
     <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-success text-white">

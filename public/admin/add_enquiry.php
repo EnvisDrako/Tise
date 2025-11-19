@@ -67,6 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             
             try {
                 // Map CSV columns to fields
+                // Indexes based on the Excel template: 
+                // 0: Name, 1: Email, 2: Phone, 3: Course, 4: Message, 5: Status, 6: Assigned ID
                 $full_name = trim($data[0] ?? '');
                 $email = trim($data[1] ?? '');
                 $phone = trim($data[2] ?? '');
@@ -142,7 +144,6 @@ renderAdminHeader($pageTitle);
 <?php endif; ?>
 
 <div class="row">
-    <!-- Manual Entry Form -->
     <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-primary text-white">
@@ -212,7 +213,6 @@ renderAdminHeader($pageTitle);
         </div>
     </div>
     
-    <!-- CSV Import -->
     <div class="col-md-6">
         <div class="card">
             <div class="card-header bg-success text-white">
@@ -224,12 +224,12 @@ renderAdminHeader($pageTitle);
                     <p class="mb-2">Your CSV file should have the following columns in order:</p>
                     <ol class="mb-2">
                         <li>Full Name (required)</li>
-                        <li>Email (required)</li>
-                        <li>Phone</li>
+                        <li>Email (required if no Phone)</li>
+                        <li>Phone (required if no Email)</li>
                         <li>Course Interest</li>
                         <li>Message</li>
-                        <li>Status (new/assigned/contacted/interested/not_interested/enrolled)</li>
-                        <li>Assigned To User ID (optional)</li>
+                        <li>Status (new, assigned, contacted, etc.)</li>
+                        <li>Assigned To User ID (optional number)</li>
                     </ol>
                     <p class="mb-0"><small>The first row should contain column headers.</small></p>
                 </div>
