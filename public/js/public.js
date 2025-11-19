@@ -452,3 +452,138 @@ function truncateText(text, maxLength) {
     if (text.length <= maxLength) return text;
     return text.substr(0, maxLength) + '...';
 }
+
+// Dropdown menu functionality for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdowns = document.querySelectorAll('.nav-dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        
+        if (toggle) {
+            // For mobile: toggle dropdown on click
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                    
+                    // Close other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+});
+
+
+// Sticky header with layout change on scroll - Smooth both directions
+let isScrolled = false;
+let ticking = false;
+
+function updateHeaderState() {
+    const header = document.querySelector('.main-header');
+    const navContainer = document.querySelector('.nav-container');
+    
+    if (!header || !navContainer) {
+        ticking = false;
+        return;
+    }
+    
+    const scrollY = window.scrollY || window.pageYOffset;
+    
+    // Thresholds for smooth transition
+    const activateThreshold = 50;   // Logo moves to left at 50px
+    const resetThreshold = 20;      // Logo returns to center at 20px
+    
+    if (scrollY > activateThreshold && !isScrolled) {
+        // Scrolling down - add scrolled state
+        isScrolled = true;
+        header.classList.add('scrolled');
+        navContainer.classList.add('scrolled');
+    } else if (scrollY < resetThreshold && isScrolled) {
+        // Scrolling up to top - remove scrolled state smoothly
+        isScrolled = false;
+        header.classList.remove('scrolled');
+        navContainer.classList.remove('scrolled');
+    }
+    
+    ticking = false;
+}
+
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        window.requestAnimationFrame(updateHeaderState);
+        ticking = true;
+    }
+}, { passive: true });
+
+
+// Scroll to Top Button - Show/Hide and Functionality
+(function() {
+    const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+    
+    if (!scrollToTopBtn) return;
+    
+    let isVisible = false;
+    let scrollTimeout;
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        
+        scrollTimeout = setTimeout(function() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            
+            if (scrollY > 300 && !isVisible) {
+                // Show button when scrolled down 300px
+                isVisible = true;
+                scrollToTopBtn.style.display = 'flex';
+                setTimeout(function() {
+                    scrollToTopBtn.style.opacity = '1';
+                    scrollToTopBtn.style.transform = 'scale(1)';
+                }, 10);
+            } else if (scrollY <= 300 && isVisible) {
+                // Hide button when near top
+                isVisible = false;
+                scrollToTopBtn.style.opacity = '0';
+                scrollToTopBtn.style.transform = 'scale(0.8)';
+                setTimeout(function() {
+                    scrollToTopBtn.style.display = 'none';
+                }, 300);
+            }
+        }, 100);
+    }, { passive: true });
+    
+    // Scroll to top when clicked
+    scrollToTopBtn.addEventListener('click', function() {
+        // Smooth scroll to top
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Add hover effect
+    scrollToTopBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.background = '#2980b9';
+    });
+    
+    scrollToTopBtn.addEventListener('mouseleave', function() {
+        this.style.transform = isVisible ? 'scale(1)' : 'scale(0.8)';
+        this.style.background = '#3498db';
+    });
+})();

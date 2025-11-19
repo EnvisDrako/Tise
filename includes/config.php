@@ -57,7 +57,7 @@ define('SMTP_FROM_EMAIL', 'noreply@localhost');
 define('SMTP_FROM_NAME', 'CRM System');
 
 // Site configuration
-define('SITE_NAME', 'Integrated CRM - Local Dev');
+define('SITE_NAME', 'Taset Academy');
 
 // JWT Secret for API (change this for production)
 define('JWT_SECRET', 'your-local-development-jwt-secret-key-change-in-production');

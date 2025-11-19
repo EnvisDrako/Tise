@@ -1,11 +1,12 @@
 <?php
 require_once __DIR__ . "/config.php";
+require_once __DIR__ . "/db_connect.php";
 require_once __DIR__ . "/functions.php";
 // Public website header with SEO optimization
-$site_name = "EduPortal - Educational Institution";
-$site_url = "https://eduportal.com";
+$site_name = "Taset Academy";
+$site_url = SITE_URL;
 $default_image = "/images/og-default.jpg";
-$twitter_handle = "@eduportal";
+$twitter_handle = "@tasetacademy";
 
 // Set default values if not provided
 $page_title = isset($page_title) ? $page_title : 'Home';
@@ -21,8 +22,8 @@ $structured_data = [
     "@type" => "EducationalOrganization",
     "name" => $site_name,
     "url" => $site_url,
-    "logo" => $site_url . "/images/logo.png",
-    "description" => "Leading educational institution committed to excellence in education and training",
+    "logo" => $site_url . "/images/logos/logo.png",
+    "description" => "Taset Academy - Leading educational institution committed to excellence in education and training",
     "address" => [
         "@type" => "PostalAddress",
         "streetAddress" => "123 Education Street",
@@ -113,20 +114,43 @@ if (isset($course_data) && is_array($course_data)) {
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <a href="<?php echo url('/'); ?>"><i class="fas fa-graduation-cap"></i> EduPortal</a>
+                    <a href="<?php echo url('/'); ?>">
+                        <img src="<?php echo asset('images/logos/logo.png'); ?>" alt="Taset Academy" class="logo-img" style="height: 90px; width: auto; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                        <span style="display:none;"><i class="fas fa-graduation-cap"></i> Taset Academy</span>
+                    </a>
                 </div>
                 <div class="nav-menu" id="nav-menu">
                     <a href="<?php echo url('/'); ?>" class="nav-link">Home</a>
-                    <a href="<?php echo url('about'); ?>" class="nav-link">About</a>
+                    
+                    <!-- About Us Dropdown -->
+                    <div class="nav-dropdown">
+                        <a href="<?php echo url('about'); ?>" class="nav-link dropdown-toggle">
+                            About Us <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="<?php echo url('about'); ?>" class="dropdown-item">About Us</a>
+                            <a href="<?php echo url('trainers'); ?>" class="dropdown-item">Our Trainers</a>
+                            <a href="<?php echo url('affiliations'); ?>" class="dropdown-item">Affiliations</a>
+                        </div>
+                    </div>
+                    
                     <a href="<?php echo url('courses'); ?>" class="nav-link">Courses</a>
-                    <a href="<?php echo url('trainers'); ?>" class="nav-link">Trainers</a>
-                    <a href="<?php echo url('affiliations'); ?>" class="nav-link">Affiliations</a>
-                    <a href="<?php echo url('gallery'); ?>" class="nav-link">Gallery</a>
-                    <a href="<?php echo url('testimonials'); ?>" class="nav-link">Testimonials</a>
+                    
+                    <!-- Gallery Dropdown -->
+                    <div class="nav-dropdown">
+                        <a href="<?php echo url('gallery'); ?>" class="nav-link dropdown-toggle">
+                            Gallery <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="<?php echo url('gallery'); ?>" class="dropdown-item">Photo Gallery</a>
+                            <a href="<?php echo url('testimonials'); ?>" class="dropdown-item">Testimonials</a>
+                            <a href="<?php echo url('placements'); ?>" class="dropdown-item">Placements</a>
+                            <a href="<?php echo url('blog'); ?>" class="dropdown-item">Blog</a>
+                        </div>
+                    </div>
+                    
                     <a href="<?php echo url('notices'); ?>" class="nav-link">Notices</a>
-                    <a href="<?php echo url('placements'); ?>" class="nav-link">Placements</a>
                     <a href="<?php echo url('downloads'); ?>" class="nav-link">Downloads</a>
-                    <a href="<?php echo url('blog'); ?>" class="nav-link">Blog</a>
                     <a href="<?php echo url('contact'); ?>" class="nav-link">Contact</a>
                     <a href="<?php echo url('enquiry'); ?>" class="nav-link enquiry-btn">Enquire Now</a>
                     <a href="<?php echo url('login'); ?>" class="nav-link login-btn"><i class="fas fa-sign-in-alt"></i> Staff Login</a>

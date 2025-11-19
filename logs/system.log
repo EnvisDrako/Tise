@@ -74,6 +74,20 @@
 [2025-11-13 10:16:41] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
             FROM enquiries 
             WHERE assigned_to_us...' at line 1
+[2025-11-14 03:26:47] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-14 10:56:58] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-18 06:03:05] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-18 06:08:38] [INFO] Admin created new user: a (Role: enquirer)
+[2025-11-18 06:08:41] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-18 06:09:09] [INFO] Admin updated user ID: 2
+[2025-11-18 06:09:11] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-18 06:09:16] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-18 06:09:24] [ERROR] Error getting enquirer stats: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'high_priority 
+            FROM enquiries 
+            WHERE assigned_to_us...' at line 1
+[2025-11-18 06:09:54] [INFO] User logout: ID 2, Username: a, Role: enquirer, IP: ::1
 [2025-11-15 02:18:53] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
 [2025-11-15 02:18:58] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
 [2025-11-15 02:19:02] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
