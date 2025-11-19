@@ -5,3 +5,17 @@
 [2025-11-13 05:01:11] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notes' in 'field list' | Query: UPDATE enquiries SET status = ?, notes = ? WHERE id = ?
 [2025-11-13 09:44:34] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notes' in 'field list' | Query: UPDATE enquiries SET status = ?, notes = ? WHERE id = ?
 [2025-11-13 10:00:54] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'notes' in 'field list' | Query: UPDATE enquiries SET status = ?, notes = ? WHERE id = ?
+[2025-11-18 12:15:24] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT * FROM notices 
+    WHERE is_active = 1 
+    AND start_date <= CURDATE() 
+    AND (end_date IS NULL OR end_date >= CURDATE())
+    ORDER BY 
+        CASE type 
+            WHEN 'urgent' THEN 1 
+            WHEN 'important' THEN 2 
+            WHEN 'event' THEN 3 
+            ELSE 4 
+        END,
+        created_at DESC
+

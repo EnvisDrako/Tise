@@ -88,41 +88,52 @@ function getAdminNavigation() {
         ],
         [
             'title' => 'User Management',
-            'url' => 'users.php',
+            'url' => url('admin/users.php'),
             'icon' => 'fas fa-users',
             'active' => basename($_SERVER['PHP_SELF']) === 'users.php'
         ],
         [
             'title' => 'Institutions',
-            'url' => 'institutions.php',
+            'url' => url('admin/institutions.php'),
             'icon' => 'fas fa-university',
             'active' => basename($_SERVER['PHP_SELF']) === 'institutions.php'
         ],
         [
             'title' => 'Enquiries',
-            'url' => 'enquiries.php',
+            'url' => url('admin/enquiries.php'),
             'icon' => 'fas fa-envelope',
             'active' => basename($_SERVER['PHP_SELF']) === 'enquiries.php',
             'submenu' => [
-                ['title' => 'View All', 'url' => 'enquiries.php'],
-                ['title' => 'Add Enquiry', 'url' => 'add_enquiry.php']
+                ['title' => 'View All', 'url' => url('admin/enquiries.php')],
+                ['title' => 'Add Enquiry', 'url' => url('admin/add_enquiry.php')]
             ]
         ],
         [
             'title' => 'Students',
-            'url' => 'students.php',
+            'url' => url('admin/students.php'),
             'icon' => 'fas fa-graduation-cap',
             'active' => basename($_SERVER['PHP_SELF']) === 'students.php',
             'submenu' => [
-                ['title' => 'View All', 'url' => 'students.php'],
-                ['title' => 'Add Student', 'url' => 'add_student.php']
+                ['title' => 'View All', 'url' => url('admin/students.php')],
+                ['title' => 'Add Student', 'url' => url('admin/add_student.php')]
             ]
         ],
         [
             'title' => 'Certificates',
-            'url' => 'certificates.php',
+            'url' => url('admin/certificates.php'),
             'icon' => 'fas fa-certificate',
             'active' => basename($_SERVER['PHP_SELF']) === 'certificates.php'
+        ],
+        [
+            'title' => 'Website Management',
+            'url' => url('admin/website/notices.php'),
+            'icon' => 'fas fa-globe',
+            'active' => strpos($_SERVER['PHP_SELF'], 'website/') !== false,
+            'submenu' => [
+                ['title' => 'Notices', 'url' => url('admin/website/notices.php')],
+                ['title' => 'Downloads', 'url' => url('admin/website/downloads.php')],
+                ['title' => 'Placements', 'url' => url('admin/website/placements.php')]
+            ]
         ]
     ];
 }

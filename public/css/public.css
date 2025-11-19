@@ -5,11 +5,18 @@
     box-sizing: border-box;
 }
 
+html {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
 }
 
 /* Header Styles */
@@ -23,15 +30,20 @@ body {
 
 .navbar {
     padding: 1rem 0;
+    position: relative;
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
 }
 
 .nav-logo a {
@@ -39,6 +51,9 @@ body {
     font-weight: bold;
     color: #2c3e50;
     text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-logo i {
@@ -46,11 +61,7 @@ body {
     margin-right: 0.5rem;
 }
 
-.nav-menu {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
+/* Removed - now handled in the centered version below */
 
 .nav-link {
     text-decoration: none;
@@ -67,9 +78,10 @@ body {
 .enquiry-btn {
     background: #3498db;
     color: white !important;
-    padding: 0.75rem 1.5rem !important;
+    padding: 0.5rem 1rem !important;
     border-radius: 5px;
     transition: background 0.3s ease;
+    font-size: 0.9rem;
 }
 
 .enquiry-btn:hover {
@@ -79,10 +91,11 @@ body {
 .login-btn {
     background: #2c3e50;
     color: white !important;
-    padding: 0.75rem 1.5rem !important;
+    padding: 0.5rem 1rem !important;
     border-radius: 5px;
     transition: background 0.3s ease;
     margin-left: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .login-btn:hover {
@@ -317,10 +330,15 @@ textarea.form-control {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 120px;
         flex-direction: column;
         background-color: white;
         width: 100%;
@@ -328,6 +346,7 @@ textarea.form-control {
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0,0,0,0.05);
         padding: 2rem 0;
+        gap: 0.5rem;
     }
 
     .nav-menu.active {
@@ -1507,5 +1526,739 @@ se Actions and Share Buttons */
     .loading-indicator {
         animation: none;
         border-top-color: transparent;
+    }
+}
+
+/* Lo
+go Styles */
+.nav-logo img.logo-img {
+    max-height: 50px;
+    max-width: 200px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.footer-logo {
+    max-height: 50px;
+    max-width: 180px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+/* Ensure logo link doesn't add extra spacing */
+.nav-logo a {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+/* Responsive logo adjustments */
+@media (max-width: 768px) {
+    .nav-logo img.logo-img {
+        max-height: 40px;
+        max-width: 150px;
+    }
+    
+    .footer-logo {
+        max-height: 40px;
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo img.logo-img {
+        max-height: 35px;
+        max-width: 120px;
+    }
+    
+    .footer-logo {
+        max-height: 35px;
+        max-width: 120px;
+    }
+}
+
+
+/* Logo Styles Override - Optimized for Square Logos */
+.nav-logo img.logo-img {
+    height: 60px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.footer-logo {
+    height: 50px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    vertical-align: middle !important;
+}
+
+/* Responsive logo adjustments for square logos */
+@media (max-width: 768px) {
+    .nav-logo img.logo-img {
+        height: 45px !important;
+    }
+    
+    .footer-logo {
+        height: 40px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo img.logo-img {
+        height: 35px !important;
+    }
+    
+    .footer-logo {
+        height: 35px !important;
+    }
+}
+
+
+/* Full-width header alignment fix */
+.main-header {
+    width: 100%;
+}
+
+.navbar {
+    width: 100%;
+}
+
+.nav-container {
+    box-sizing: border-box;
+}
+
+/* Center logo and menu */
+.nav-logo {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.nav-toggle {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+/* Remove any default body margins that might cause spacing */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Ensure header starts at the very edge */
+.main-header {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.navbar {
+    margin: 0 !important;
+}
+
+/* Minimal padding for nav container */
+.nav-container {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
+/* Responsive padding adjustments */
+@media (min-width: 769px) {
+    .nav-container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav-container {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+
+/* Debug and fix any spacing issues */
+.nav-logo a {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-logo {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Make sure logo image has no extra spacing */
+.nav-logo img.logo-img {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+}
+
+
+/* Dropdown Navigation Styles */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-dropdown .dropdown-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.nav-dropdown .dropdown-toggle i {
+    font-size: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-top: 0.5rem;
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa;
+    color: #3498db;
+    padding-left: 2rem;
+}
+
+/* Mobile dropdown adjustments */
+@media (max-width: 768px) {
+    .nav-dropdown {
+        width: 100%;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: #f8f9fa;
+        margin: 0.5rem 0;
+        display: none;
+    }
+    
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown.active .dropdown-menu {
+        display: block;
+    }
+    
+    .dropdown-item {
+        padding: 0.5rem 2rem;
+    }
+    
+    .dropdown-item:hover {
+        padding-left: 2.5rem;
+    }
+}
+
+
+/* Centered Navigation Layout */
+.navbar {
+    text-align: center;
+}
+
+.nav-logo img.logo-img {
+    margin: 0 auto;
+}
+
+/* Adjust dropdown positioning for centered layout */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown .dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Ensure buttons stay inline with menu items */
+.enquiry-btn,
+.login-btn {
+    display: inline-block;
+}
+
+/* Desktop centered layout adjustments */
+@media (min-width: 769px) {
+    .nav-container {
+        padding: 1.5rem 2rem;
+    }
+    
+    .nav-logo {
+        margin-bottom: 0.5rem;
+    }
+    
+    .nav-menu {
+        justify-content: center;
+    }
+}
+
+
+/* Sticky Header with Scroll Effect - No Flicker */
+.main-header {
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: box-shadow, padding;
+}
+
+.main-header.scrolled {
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+}
+
+/* Change layout when scrolled - Smooth transitions */
+.nav-container {
+    will-change: flex-direction, padding, gap;
+}
+
+.nav-container.scrolled {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    gap: 2rem;
+}
+
+.nav-logo {
+    will-change: margin-bottom;
+    transition: margin-bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-container.scrolled .nav-logo {
+    margin-bottom: 0;
+    order: 1;
+}
+
+.nav-menu {
+    will-change: gap;
+    transition: gap 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-container.scrolled .nav-menu {
+    order: 2;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 1rem;
+}
+
+.nav-container.scrolled .nav-toggle {
+    order: 3;
+}
+
+/* Smaller logo when scrolled - Smooth transition */
+.nav-logo img.logo-img {
+    will-change: height;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.nav-container.scrolled .nav-logo img.logo-img {
+    height: 40px !important;
+}
+
+/* Adjust dropdown position when scrolled */
+.nav-dropdown .dropdown-menu {
+    will-change: transform;
+}
+
+.nav-container.scrolled .nav-dropdown .dropdown-menu {
+    left: 0;
+    transform: translateY(-10px);
+}
+
+.nav-container.scrolled .nav-dropdown:hover .dropdown-menu {
+    transform: translateY(0);
+}
+
+/* Mobile: keep centered layout even when scrolled */
+@media (max-width: 768px) {
+    .nav-container.scrolled {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .nav-container.scrolled .nav-logo {
+        order: 1;
+    }
+    
+    .nav-container.scrolled .nav-menu {
+        order: 2;
+    }
+    
+    .nav-container.scrolled .nav-logo img.logo-img {
+        height: 35px !important;
+    }
+}
+
+
+/* Prevent flicker and layout shift during scroll transition */
+.nav-container {
+    min-height: 140px;
+    transition: min-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                flex-direction 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                gap 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-container.scrolled {
+    min-height: 70px;
+}
+
+/* Ensure smooth logo transition without jump */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevent menu from jumping */
+.nav-menu {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hardware acceleration for smoother transitions */
+.main-header,
+.nav-container,
+.nav-logo,
+.nav-logo img,
+.nav-menu {
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    perspective: 1000px;
+}
+
+/* Smaller buttons in scrolled state */
+.nav-container.scrolled .enquiry-btn,
+.nav-container.scrolled .login-btn {
+    padding: 0.4rem 0.9rem !important;
+    font-size: 0.85rem;
+}
+
+
+/* Fix reverse animation - ensure smooth transition back to centered */
+.nav-container:not(.scrolled) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-container:not(.scrolled) .nav-logo {
+    order: 0;
+    margin-bottom: 0;
+}
+
+.nav-container:not(.scrolled) .nav-menu {
+    order: 0;
+    justify-content: center;
+    flex-grow: 0;
+}
+
+.nav-container:not(.scrolled) .nav-toggle {
+    order: 0;
+}
+
+/* Ensure logo size transitions smoothly in both directions */
+.nav-logo img.logo-img {
+    height: 60px !important;
+}
+
+.nav-container.scrolled .nav-logo img.logo-img {
+    height: 45px !important;
+}
+
+/* Ensure all transitions are bidirectional */
+.main-header,
+.nav-container,
+.nav-logo,
+.nav-menu,
+.nav-logo img.logo-img {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.4s;
+}
+
+
+/* Scroll to Top Button Styles */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 800px;
+    right: 20px;
+    z-index: 999;
+    background: #3498db;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top-btn:hover {
+    background: #2980b9;
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.scroll-to-top-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .scroll-to-top-btn {
+        bottom: 70px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* Ensure button is above other elements */
+.scroll-to-top-btn {
+    will-change: opacity, transform;
+}
+
+
+/* Ensure print-only elements are never visible on screen */
+.print-only,
+.print-header,
+.print-footer {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* Only show print elements when actually printing */
+@media print {
+    .print-only,
+    .print-header,
+    .print-footer {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        left: auto !important;
+    }
+}
+
+
+/* Hide breadcrumb navigation */
+nav.breadcrumb,
+.breadcrumb-nav,
+.breadcrumb-list {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+
+/* Hide newsletter signup - not needed */
+.newsletter-signup,
+.newsletter-form,
+.newsletter-input,
+.newsletter-btn {
+    display: none !important;
+}
+
+
+/* Fix share modal visibility and styling */
+.social-share-modal {
+    z-index: 10000 !important;
+}
+
+.social-share-modal.active {
+    display: flex !important;
+}
+
+.share-modal-content {
+    position: relative;
+    z-index: 10001;
+    max-width: 500px;
+    width: 90%;
+    background: #2c3e50 !important;
+    color: white;
+    pointer-events: auto;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.share-header {
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #34495e;
+    margin-bottom: 1.5rem;
+}
+
+.share-header h3 {
+    font-size: 1.5rem;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.close-share-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #bdc3c7;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.close-share-modal:hover {
+    color: #e74c3c;
+}
+
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white !important;
+    font-weight: 500;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    color: white !important;
+}
+
+.share-btn i {
+    font-size: 1.2rem;
+}
+
+.facebook-share {
+    background: #1877f2;
+}
+
+.twitter-share {
+    background: #1da1f2;
+}
+
+.linkedin-share {
+    background: #0077b5;
+}
+
+.whatsapp-share {
+    background: #25d366;
+}
+
+.email-share {
+    background: #ea4335;
+}
+
+.copy-link {
+    background: #6c757d;
+    grid-column: span 2;
+}
+
+.copy-link:hover {
+    background: #5a6268;
+}
+
+.copy-link.copied {
+    background: #28a745 !important;
+}
+
+.copy-link.copied:hover {
+    background: #28a745 !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .share-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .copy-link {
+        grid-column: span 1;
     }
 }

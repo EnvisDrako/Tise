@@ -38,24 +38,24 @@
         </div>
     </div>
     
-    <!-- Floating Social Share Button -->
-    <button id="floating-share-btn" class="floating-share-btn" aria-label="Share this page" style="position: fixed; bottom: 20px; right: 20px; z-index: 999; background: #e74c3c; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">
-        <i class="fas fa-share-alt"></i>
+    <!-- Floating Scroll to Top Button -->
+    <button id="scroll-to-top-btn" class="scroll-to-top-btn" aria-label="Scroll to top" style="position: fixed; bottom: 20px; right: 20px; z-index: 999; background: #3498db; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; align-items: center; justify-content: center; font-size: 20px; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease;">
+        <i class="fas fa-arrow-up"></i>
     </button>
     
 
     <!-- Print-only header -->
-    <div class="print-header print-only" style="display: none;">
+    <div class="print-header print-only" style="display: none !important;">
         <h1>Taset Academy</h1>
         <p>Leading educational institution committed to excellence in education and training</p>
-        <p>Website: <?php echo SITE_URL; ?> | Email: info@tasetacademy.com | Phone: +1 234 567 8900</p>
+        <p>Website: <?php echo SITE_URL; ?> | Email: tasetacademy@gmail.com | Phone: +91 9447956412</p>
     </div>
     
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>
-                    <img src="<?php echo asset('images/logos/logo-white.png'); ?>" alt="Taset Academy" class="footer-logo" style="height: 40px; vertical-align: middle;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                    <img src="<?php echo asset('images/logos/logo-white.png'); ?>" alt="Taset Academy" class="footer-logo" style="height: 50px; width: auto; object-fit: contain; vertical-align: middle;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
                     <span style="display:none;"><i class="fas fa-graduation-cap"></i> Taset Academy</span>
                 </h3>
                 <p>Leading educational institution committed to excellence in education and training.</p>
@@ -75,15 +75,6 @@
                     <a href="https://youtube.com/tasetacademy" target="_blank" rel="noopener" aria-label="Subscribe to our YouTube channel">
                         <i class="fab fa-youtube"></i>
                     </a>
-                </div>
-                <div class="newsletter-signup">
-                    <h4>Stay Updated</h4>
-                    <form class="newsletter-form" action="<?php echo url('api/newsletter'); ?>" method="POST">
-                        <input type="email" name="email" placeholder="Enter your email" required class="newsletter-input">
-                        <button type="submit" class="newsletter-btn">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
                 </div>
             </div>
             <div class="footer-section">
@@ -111,9 +102,9 @@
             <div class="footer-section">
                 <h4>Contact Info</h4>
                 <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
-                    <p><i class="fas fa-envelope"></i> info@tasetacademy.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Education Street, Knowledge City</p>
+                    <p><i class="fas fa-phone"></i> +91 9447956412</p>
+                    <p><i class="fas fa-envelope"></i> tasetacademy@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Multiple Locations</p>
                     <p><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM, Sat: 9AM-2PM</p>
                 </div>
                 <div class="footer-certifications">
@@ -141,7 +132,7 @@
     </footer>
     
     <!-- Print-only footer -->
-    <div class="print-footer print-only" style="display: none;">
+    <div class="print-footer print-only" style="display: none !important;">
         <p>Printed from: <?php echo htmlspecialchars($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?> | 
            Date: <?php echo date('F j, Y'); ?> | 
            Page <?php echo '{page}'; ?> of <?php echo '{pages}'; ?></p>

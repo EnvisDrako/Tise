@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeSocialSharing() {
-    const floatingShareBtn = document.getElementById('floating-share-btn');
+    // Note: floating-share-btn has been replaced with scroll-to-top-btn
+    // Keeping share functionality for share-page-btn only
     const sharePageBtn = document.getElementById('share-page-btn');
     const socialShareModal = document.getElementById('social-share-modal');
     const closeShareModal = document.querySelector('.close-share-modal');
@@ -29,21 +30,10 @@ function initializeSocialSharing() {
     const pageDescription = document.querySelector('meta[name="description"]')?.content || '';
     const pageImage = document.querySelector('meta[property="og:image"]')?.content || '';
     
-    // Show floating share button after scrolling
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            if (window.scrollY > 300) {
-                floatingShareBtn.style.display = 'block';
-            } else {
-                floatingShareBtn.style.display = 'none';
-            }
-        }, 100);
-    });
-    
     // Open share modal
     function openShareModal() {
+        if (!socialShareModal) return;
+        
         updateShareLinks();
         socialShareModal.classList.add('active');
         document.body.style.overflow = 'hidden';
@@ -51,20 +41,27 @@ function initializeSocialSharing() {
         // Focus management for accessibility
         const firstButton = socialShareModal.querySelector('.share-btn');
         if (firstButton) {
-            firstButton.focus();
+            setTimeout(() => firstButton.focus(), 100);
         }
+        
+        console.log('Share modal opened'); // Debug log
     }
     
     // Close share modal
     function closeShareModalFunc() {
         socialShareModal.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Reset copy button when modal closes
+        const copyLinkBtn = document.querySelector('.copy-link');
+        if (copyLinkBtn && copyLinkBtn.classList.contains('copied')) {
+            copyLinkBtn.querySelector('span').textContent = 'Copy Link';
+            copyLinkBtn.classList.remove('copied');
+        }
     }
     
     // Event listeners
-    if (floatingShareBtn) {
-        floatingShareBtn.addEventListener('click', openShareModal);
-    }
+    // Note: floatingShareBtn removed - now using scroll-to-top button instead
     
     if (sharePageBtn) {
         sharePageBtn.addEventListener('click', openShareModal);
@@ -134,18 +131,20 @@ function initializeSocialSharing() {
         const copyLinkBtn = document.querySelector('.copy-link');
         if (copyLinkBtn) {
             copyLinkBtn.dataset.url = currentUrl;
-            copyLinkBtn.addEventListener('click', function() {
+            
+            // Remove old event listeners by cloning
+            const newCopyBtn = copyLinkBtn.cloneNode(true);
+            copyLinkBtn.parentNode.replaceChild(newCopyBtn, copyLinkBtn);
+            
+            newCopyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
                 copyToClipboard(currentUrl);
                 
-                // Visual feedback
-                const originalText = this.querySelector('span').textContent;
+                // Visual feedback - stays green until modal closes
                 this.querySelector('span').textContent = 'Copied!';
                 this.classList.add('copied');
                 
-                setTimeout(() => {
-                    this.querySelector('span').textContent = originalText;
-                    this.classList.remove('copied');
-                }, 2000);
+                // Don't reset - will reset when modal closes
             });
         }
     }
@@ -626,8 +625,9 @@ function monitorWebVitals() {
             }
         }).observe({ entryTypes: ['layout-shift'] });
     }
-}//
- Individual Content Sharing Enhancement
+}
+
+// Individual Content Sharing Enhancement
 document.addEventListener('DOMContentLoaded', function() {
     initializeContentSharing();
 });
@@ -929,10 +929,10 @@ function generateBreadcrumbs() {
     }
 }
 
-// Initialize breadcrumbs if not on home page
-if (window.location.pathname !== '/' && window.location.pathname !== '') {
-    generateBreadcrumbs();
-}
+// Breadcrumbs disabled - not needed for this site
+// if (window.location.pathname !== '/' && window.location.pathname !== '') {
+//     generateBreadcrumbs();
+// }
 
 // Enhanced performance monitoring
 function initializePerformanceMonitoring() {

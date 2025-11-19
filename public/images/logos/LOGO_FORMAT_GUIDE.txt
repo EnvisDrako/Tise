@@ -1,0 +1,87 @@
+TASET ACADEMY - LOGO FORMAT GUIDE
+==================================
+
+RECOMMENDED LOGO SPECIFICATIONS:
+
+✅ PERFECT FOR SQUARE LOGOS!
+
+1. HEADER LOGO (logo.png)
+   - Format: PNG with transparent background
+   - Dimensions: ANY square size (e.g., 200x200, 500x500, 1000x1000)
+   - Aspect Ratio: 1:1 (square) or any ratio
+   - File Size: Under 100KB
+   - Color: Full color version for light backgrounds
+   
+2. FOOTER LOGO (logo-white.png)
+   - Format: PNG with transparent background
+   - Dimensions: Same as header logo
+   - Aspect Ratio: 1:1 (square) or any ratio
+   - File Size: Under 100KB
+   - Color: White or light version for dark backgrounds
+
+CURRENT CSS CONSTRAINTS:
+- Fixed Height: 50px (header and footer)
+- Width: Automatically calculated to maintain aspect ratio
+- Perfect for square logos - they will display at 50x50px
+- No stretching or distortion
+
+LOGO DESIGN TIPS FOR SQUARE LOGOS:
+1. ✅ Square logos work perfectly!
+2. Keep details visible at 50x50px size
+3. Avoid very thin lines (may not display well at small size)
+4. Test on both light and dark backgrounds
+5. Ensure good contrast
+
+RECOMMENDED SQUARE LOGO SIZES:
+- Small: 200x200 pixels (good for web)
+- Medium: 500x500 pixels (recommended)
+- Large: 1000x1000 pixels (high quality)
+- Any square size works - it will scale to 50px height
+
+RECOMMENDED TOOLS:
+- Photoshop: Image > Image Size
+- GIMP: Image > Scale Image
+- Online: TinyPNG.com (for compression)
+- Online: Squoosh.app (for optimization)
+
+FILE NAMING (EXACT):
+✓ logo.png          (for header - light background)
+✓ logo-white.png    (for footer - dark background)
+
+WRONG NAMES (will not work):
+✗ Logo.png
+✗ LOGO.PNG
+✗ taset-logo.png
+✗ logo.jpg
+
+CURRENT BEHAVIOR:
+- Logo displays at 50px height (width auto-calculated)
+- Square logos display as 50x50px
+- Maintains aspect ratio perfectly
+- No stretching or distortion
+- Responsive: Smaller on mobile devices
+
+MOBILE SIZES:
+- Tablet (768px): 40px height (40x40px for square)
+- Phone (480px): 35px height (35x35px for square)
+
+YOUR SQUARE LOGO WILL:
+✅ Display at 50x50 pixels on desktop
+✅ Display at 40x40 pixels on tablet
+✅ Display at 35x35 pixels on mobile
+✅ Maintain perfect square proportions
+✅ Look crisp and professional
+
+NEED HELP?
+If your logo needs adjustment:
+1. Save as PNG (not JPG)
+2. Keep it square (e.g., 500x500px)
+3. Ensure transparent background
+4. Compress file size to under 100KB
+5. Upload with exact filename: logo.png
+
+For white version:
+1. Create white/light colored version
+2. Keep same square dimensions
+3. Save as PNG with transparency
+4. Name exactly: logo-white.png
