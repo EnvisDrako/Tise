@@ -112,6 +112,72 @@
         
 [2025-11-18 07:33:00] Query execution failed: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'performed_by' cannot be null | Query: DELETE FROM users WHERE id IN (?)
 [2025-11-18 07:33:48] Query execution failed: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'performed_by' cannot be null | Query: DELETE FROM users WHERE id IN (?)
+[2025-11-19 02:48:02] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT n.*, u.full_name as created_by_name 
+    FROM notices n 
+    LEFT JOIN users u ON n.created_by = u.id 
+    ORDER BY n.created_at DESC
+
+[2025-11-19 02:48:20] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.downloads' doesn't exist | Query: 
+    SELECT d.*, u.full_name as created_by_name 
+    FROM downloads d 
+    LEFT JOIN users u ON d.created_by = u.id 
+    ORDER BY d.created_at DESC
+
+[2025-11-19 02:48:33] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT n.*, u.full_name as created_by_name 
+    FROM notices n 
+    LEFT JOIN users u ON n.created_by = u.id 
+    ORDER BY n.created_at DESC
+
+[2025-11-19 02:50:45] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT n.*, u.full_name as created_by_name 
+    FROM notices n 
+    LEFT JOIN users u ON n.created_by = u.id 
+    ORDER BY n.created_at DESC
+
+[2025-11-19 02:50:56] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.downloads' doesn't exist | Query: 
+    SELECT d.*, u.full_name as created_by_name 
+    FROM downloads d 
+    LEFT JOIN users u ON d.created_by = u.id 
+    ORDER BY d.created_at DESC
+
+[2025-11-19 02:51:07] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.placements' doesn't exist | Query: 
+    SELECT p.*, u.full_name as created_by_name 
+    FROM placements p 
+    LEFT JOIN users u ON p.created_by = u.id 
+    ORDER BY p.placement_year DESC, p.created_at DESC
+
+[2025-11-19 02:52:31] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT n.*, u.full_name as created_by_name 
+    FROM notices n 
+    LEFT JOIN users u ON n.created_by = u.id 
+    ORDER BY n.created_at DESC
+
+[2025-11-19 03:00:25] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT n.*, u.full_name as created_by_name 
+    FROM notices n 
+    LEFT JOIN users u ON n.created_by = u.id 
+    ORDER BY n.created_at DESC
+
+[2025-11-19 03:00:34] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT n.*, u.full_name as created_by_name 
+    FROM notices n 
+    LEFT JOIN users u ON n.created_by = u.id 
+    ORDER BY n.created_at DESC
+
+[2025-11-19 03:00:41] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.notices' doesn't exist | Query: 
+    SELECT n.*, u.full_name as created_by_name 
+    FROM notices n 
+    LEFT JOIN users u ON n.created_by = u.id 
+    ORDER BY n.created_at DESC
+
+[2025-11-19 03:01:18] Query execution failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'integrated_crm.downloads' doesn't exist | Query: 
+    SELECT d.*, u.full_name as created_by_name 
+    FROM downloads d 
+    LEFT JOIN users u ON d.created_by = u.id 
+    ORDER BY d.created_at DESC
+
 [2025-11-19 22:39:25] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
 [2025-11-19 22:39:30] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
 [2025-11-19 22:42:57] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)

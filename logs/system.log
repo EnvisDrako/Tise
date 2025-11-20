@@ -141,6 +141,16 @@
 [2025-11-18 09:11:41] [INFO] Admin imported 1 students via CSV
 [2025-11-18 09:12:10] [INFO] Admin imported 2 students via CSV
 [2025-11-18 09:12:36] [INFO] Admin imported 2 enquiries via CSV
+[2025-11-19 03:11:18] [INFO] Admin created new notice: test 1
+[2025-11-19 03:30:54] [INFO] Admin created new download: test1
+[2025-11-19 03:32:13] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-20 00:51:58] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-20 00:52:00] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-20 00:52:03] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-20 00:52:04] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-20 00:52:06] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
+[2025-11-20 00:58:31] [INFO] Admin created new user: tvfrg (Role: faculty)
+[2025-11-20 00:59:47] [INFO] Admin added student: Harisankar G (ID: fb6)
 [2025-11-19 23:04:58] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
 [2025-11-19 23:05:19] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
 [2025-11-19 23:18:52] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
