@@ -82,9 +82,11 @@ function getAdminNavigation() {
     return [
         [
             'title' => 'Dashboard',
-            'url' => 'index.php',
+            // 👇 THE FIX: Change 'index.php' (relative) to url('admin/') (absolute)
+            'url' => url('admin/'), 
             'icon' => 'fas fa-tachometer-alt',
-            'active' => basename($_SERVER['PHP_SELF']) === 'index.php'
+            // The active check needs to be broader than just 'index.php'
+            'active' => basename($_SERVER['PHP_SELF']) === 'index.php' || basename($_SERVER['PHP_SELF']) === 'dashboard.php',
         ],
         [
             'title' => 'User Management',
