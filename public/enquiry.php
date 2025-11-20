@@ -33,9 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Full name must be at least 2 characters";
     }
     
-    if (empty($email)) {
-        $errors[] = "Email is required";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Please enter a valid email address";
     }
     
@@ -49,11 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Please select a course of interest";
     }
     
-    if (empty($message)) {
-        $errors[] = "Message is required";
-    } elseif (strlen($message) < 10) {
-        $errors[] = "Message must be at least 10 characters";
-    }
+    // Message is optional, no validation needed
     
     // Handle file upload
     $documents_path = null;
@@ -93,6 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // If no errors, save to database
     if (empty($errors)) {
         try {
+            $db = DatabaseConnection::getInstance();
+            $pdo = $db->getConnection();
+            
             $stmt = $pdo->prepare("
                 INSERT INTO enquiries (
                     full_name, email, phone, course_interest, message, 
@@ -100,6 +97,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     documents_path, status, created_at
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', NOW())
             ");
+            
+            // Provide default values for optional fields
+            $email = !empty($email) ? $email : 'noemail@provided.com';
+            $message = !empty($message) ? $message : 'No message provided';
+            $education_level = !empty($education_level) ? $education_level : 'Not specified';
+            $experience_level = !empty($experience_level) ? $experience_level : 'Not specified';
+            $preferred_schedule = !empty($preferred_schedule) ? $preferred_schedule : 'Not specified';
             
             $result = $stmt->execute([
                 $full_name, $email, $phone, $course_interest, $message,
@@ -109,27 +113,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result) {
                 $success_message = "Thank you for your enquiry! We will contact you within 24 hours.";
                 
-                // Send email notification (basic implementation)
-                $to = "admissions@eduportal.com";
-                $subject = "New Enquiry from " . $full_name;
-                $email_message = "
-                    New enquiry received:
+                // Send email notification (optional - only if mail server is configured)
+                try {
+                    $to = "admissions@eduportal.com";
+                    $subject = "New Enquiry from " . $full_name;
+                    $email_message = "
+                        New enquiry received:
+                        
+                        Name: $full_name
+                        Email: $email
+                        Phone: $phone
+                        Course Interest: $course_interest
+                        Education Level: $education_level
+                        Experience Level: $experience_level
+                        Preferred Schedule: $preferred_schedule
+                        
+                        Message: $message
+                    ";
                     
-                    Name: $full_name
-                    Email: $email
-                    Phone: $phone
-                    Course Interest: $course_interest
-                    Education Level: $education_level
-                    Experience Level: $experience_level
-                    Preferred Schedule: $preferred_schedule
+                    $headers = "From: noreply@eduportal.com\r\n";
+                    $headers .= "Reply-To: $email\r\n";
                     
-                    Message: $message
-                ";
-                
-                $headers = "From: noreply@eduportal.com\r\n";
-                $headers .= "Reply-To: $email\r\n";
-                
-                mail($to, $subject, $email_message, $headers);
+                    @mail($to, $subject, $email_message, $headers);
+                    // Suppress mail errors - enquiry is saved even if email fails
+                } catch (Exception $e) {
+                    // Email failed but enquiry is saved - no action needed
+                }
                 
                 // Clear form data after successful submission
                 $_POST = [];
@@ -138,7 +147,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } catch (PDOException $e) {
             $error_message = "Database error occurred. Please try again later.";
+            // Log detailed error for debugging
             error_log("Enquiry submission error: " . $e->getMessage());
+            error_log("SQL State: " . $e->getCode());
+            error_log("Error Info: " . print_r($e->errorInfo, true));
+            
+            // Show detailed error in debug mode
+            if (defined('DEBUG_MODE') && DEBUG_MODE) {
+                $error_message .= "<br><small>Debug: " . htmlspecialchars($e->getMessage()) . "</small>";
+            }
         }
     } else {
         $error_message = implode('<br>', $errors);
@@ -155,37 +172,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <section class="enquiry-form section">
     <div class="container">
-        <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- if ($success_message): ?>
+        <?php  if ($success_message): ?>
             <div class="alert alert-success">
                 <i class="fas fa-check-circle"></i>
-                <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo $success_message; ?>
+                <?php  echo $success_message; ?>
             </div>
-        <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- endif; ?>
+        <?php  endif; ?>
         
-        <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- if ($error_message): ?>
+        <?php  if ($error_message): ?>
             <div class="alert alert-error">
                 <i class="fas fa-exclamation-circle"></i>
-                <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo $error_message; ?>
+                <?php  echo $error_message; ?>
             </div>
-        <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- endif; ?>
+        <?php  endif; ?>
         
         <div class="info-banner">
             <div class="info-banner-content">
@@ -204,22 +203,16 @@ define('SYSTEM_ACCESS', true);
                         <div class="form-group">
                             <label for="full_name">Full Name *</label>
                             <input type="text" id="full_name" name="full_name" class="form-control" 
-                                   value="<?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo htmlspecialchars($_POST['full_name'] ?? ''); ?>" 
+                                   value="<?php  echo htmlspecialchars($_POST['full_name'] ?? ''); ?>" 
                                    required minlength="2" maxlength="100">
                             <div class="field-error"></div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
+                            <label for="email">Email Address</label>
                             <input type="email" id="email" name="email" class="form-control" 
-                                   value="<?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo htmlspecialchars($_POST['email'] ?? ''); ?>" 
-                                   required maxlength="100">
+                                   value="<?php  echo htmlspecialchars($_POST['email'] ?? ''); ?>" 
+                                   maxlength="100">
                             <div class="field-error"></div>
                         </div>
                     </div>
@@ -228,10 +221,7 @@ define('SYSTEM_ACCESS', true);
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
                             <input type="tel" id="phone" name="phone" class="form-control" 
-                                   value="<?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo htmlspecialchars($_POST['phone'] ?? ''); ?>" 
+                                   value="<?php  echo htmlspecialchars($_POST['phone'] ?? ''); ?>" 
                                    required maxlength="20" placeholder="+1 234 567 8900">
                             <div class="field-error"></div>
                         </div>
@@ -240,34 +230,13 @@ define('SYSTEM_ACCESS', true);
                             <label for="course_interest">Course of Interest *</label>
                             <select id="course_interest" name="course_interest" class="form-control" required>
                                 <option value="">Select a course</option>
-                                <option value="Web Development" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['course_interest'] ?? '') === 'Web Development' ? 'selected' : ''; ?>>Full Stack Web Development</option>
-                                <option value="Data Science" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['course_interest'] ?? '') === 'Data Science' ? 'selected' : ''; ?>>Data Science & Analytics</option>
-                                <option value="Digital Marketing" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['course_interest'] ?? '') === 'Digital Marketing' ? 'selected' : ''; ?>>Digital Marketing Mastery</option>
-                                <option value="Graphic Design" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['course_interest'] ?? '') === 'Graphic Design' ? 'selected' : ''; ?>>Graphic Design & Visual Arts</option>
-                                <option value="Business Analytics" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['course_interest'] ?? '') === 'Business Analytics' ? 'selected' : ''; ?>>Business Analytics & Intelligence</option>
-                                <option value="English Communication" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['course_interest'] ?? '') === 'English Communication' ? 'selected' : ''; ?>>Business English Communication</option>
-                                <option value="Other" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['course_interest'] ?? '') === 'Other' ? 'selected' : ''; ?>>Other (Please specify in message)</option>
+                                <option value="Web Development" <?php  echo ($_POST['course_interest'] ?? '') === 'Web Development' ? 'selected' : ''; ?>>Full Stack Web Development</option>
+                                <option value="Data Science" <?php  echo ($_POST['course_interest'] ?? '') === 'Data Science' ? 'selected' : ''; ?>>Data Science & Analytics</option>
+                                <option value="Digital Marketing" <?php  echo ($_POST['course_interest'] ?? '') === 'Digital Marketing' ? 'selected' : ''; ?>>Digital Marketing Mastery</option>
+                                <option value="Graphic Design" <?php  echo ($_POST['course_interest'] ?? '') === 'Graphic Design' ? 'selected' : ''; ?>>Graphic Design & Visual Arts</option>
+                                <option value="Business Analytics" <?php  echo ($_POST['course_interest'] ?? '') === 'Business Analytics' ? 'selected' : ''; ?>>Business Analytics & Intelligence</option>
+                                <option value="English Communication" <?php  echo ($_POST['course_interest'] ?? '') === 'English Communication' ? 'selected' : ''; ?>>Business English Communication</option>
+                                <option value="Other" <?php  echo ($_POST['course_interest'] ?? '') === 'Other' ? 'selected' : ''; ?>>Other (Please specify in message)</option>
                             </select>
                             <div class="field-error"></div>
                         </div>
@@ -278,26 +247,11 @@ define('SYSTEM_ACCESS', true);
                             <label for="education_level">Current Education Level</label>
                             <select id="education_level" name="education_level" class="form-control">
                                 <option value="">Select education level</option>
-                                <option value="High School" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['education_level'] ?? '') === 'High School' ? 'selected' : ''; ?>>High School</option>
-                                <option value="Diploma" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['education_level'] ?? '') === 'Diploma' ? 'selected' : ''; ?>>Diploma</option>
-                                <option value="Bachelor's Degree" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['education_level'] ?? '') === 'Bachelor\'s Degree' ? 'selected' : ''; ?>>Bachelor's Degree</option>
-                                <option value="Master's Degree" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['education_level'] ?? '') === 'Master\'s Degree' ? 'selected' : ''; ?>>Master's Degree</option>
-                                <option value="Other" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['education_level'] ?? '') === 'Other' ? 'selected' : ''; ?>>Other</option>
+                                <option value="High School" <?php  echo ($_POST['education_level'] ?? '') === 'High School' ? 'selected' : ''; ?>>High School</option>
+                                <option value="Diploma" <?php  echo ($_POST['education_level'] ?? '') === 'Diploma' ? 'selected' : ''; ?>>Diploma</option>
+                                <option value="Bachelor's Degree" <?php  echo ($_POST['education_level'] ?? '') === 'Bachelor\'s Degree' ? 'selected' : ''; ?>>Bachelor's Degree</option>
+                                <option value="Master's Degree" <?php  echo ($_POST['education_level'] ?? '') === 'Master\'s Degree' ? 'selected' : ''; ?>>Master's Degree</option>
+                                <option value="Other" <?php  echo ($_POST['education_level'] ?? '') === 'Other' ? 'selected' : ''; ?>>Other</option>
                             </select>
                         </div>
                         
@@ -305,22 +259,10 @@ define('SYSTEM_ACCESS', true);
                             <label for="experience_level">Experience Level</label>
                             <select id="experience_level" name="experience_level" class="form-control">
                                 <option value="">Select experience level</option>
-                                <option value="Beginner" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['experience_level'] ?? '') === 'Beginner' ? 'selected' : ''; ?>>Beginner (No experience)</option>
-                                <option value="Some Experience" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['experience_level'] ?? '') === 'Some Experience' ? 'selected' : ''; ?>>Some Experience (1-2 years)</option>
-                                <option value="Intermediate" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['experience_level'] ?? '') === 'Intermediate' ? 'selected' : ''; ?>>Intermediate (3-5 years)</option>
-                                <option value="Advanced" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['experience_level'] ?? '') === 'Advanced' ? 'selected' : ''; ?>>Advanced (5+ years)</option>
+                                <option value="Beginner" <?php  echo ($_POST['experience_level'] ?? '') === 'Beginner' ? 'selected' : ''; ?>>Beginner (No experience)</option>
+                                <option value="Some Experience" <?php  echo ($_POST['experience_level'] ?? '') === 'Some Experience' ? 'selected' : ''; ?>>Some Experience (1-2 years)</option>
+                                <option value="Intermediate" <?php  echo ($_POST['experience_level'] ?? '') === 'Intermediate' ? 'selected' : ''; ?>>Intermediate (3-5 years)</option>
+                                <option value="Advanced" <?php  echo ($_POST['experience_level'] ?? '') === 'Advanced' ? 'selected' : ''; ?>>Advanced (5+ years)</option>
                             </select>
                         </div>
                     </div>
@@ -329,26 +271,11 @@ define('SYSTEM_ACCESS', true);
                         <label for="preferred_schedule">Preferred Schedule</label>
                         <select id="preferred_schedule" name="preferred_schedule" class="form-control">
                             <option value="">Select preferred schedule</option>
-                            <option value="Morning (9 AM - 12 PM)" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['preferred_schedule'] ?? '') === 'Morning (9 AM - 12 PM)' ? 'selected' : ''; ?>>Morning (9 AM - 12 PM)</option>
-                            <option value="Afternoon (1 PM - 4 PM)" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['preferred_schedule'] ?? '') === 'Afternoon (1 PM - 4 PM)' ? 'selected' : ''; ?>>Afternoon (1 PM - 4 PM)</option>
-                            <option value="Evening (5 PM - 8 PM)" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['preferred_schedule'] ?? '') === 'Evening (5 PM - 8 PM)' ? 'selected' : ''; ?>>Evening (5 PM - 8 PM)</option>
-                            <option value="Weekend" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['preferred_schedule'] ?? '') === 'Weekend' ? 'selected' : ''; ?>>Weekend</option>
-                            <option value="Flexible" <?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo ($_POST['preferred_schedule'] ?? '') === 'Flexible' ? 'selected' : ''; ?>>Flexible</option>
+                            <option value="Morning (9 AM - 12 PM)" <?php  echo ($_POST['preferred_schedule'] ?? '') === 'Morning (9 AM - 12 PM)' ? 'selected' : ''; ?>>Morning (9 AM - 12 PM)</option>
+                            <option value="Afternoon (1 PM - 4 PM)" <?php  echo ($_POST['preferred_schedule'] ?? '') === 'Afternoon (1 PM - 4 PM)' ? 'selected' : ''; ?>>Afternoon (1 PM - 4 PM)</option>
+                            <option value="Evening (5 PM - 8 PM)" <?php  echo ($_POST['preferred_schedule'] ?? '') === 'Evening (5 PM - 8 PM)' ? 'selected' : ''; ?>>Evening (5 PM - 8 PM)</option>
+                            <option value="Weekend" <?php  echo ($_POST['preferred_schedule'] ?? '') === 'Weekend' ? 'selected' : ''; ?>>Weekend</option>
+                            <option value="Flexible" <?php  echo ($_POST['preferred_schedule'] ?? '') === 'Flexible' ? 'selected' : ''; ?>>Flexible</option>
                         </select>
                     </div>
                     
@@ -369,13 +296,10 @@ define('SYSTEM_ACCESS', true);
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Message *</label>
+                        <label for="message">Message</label>
                         <textarea id="message" name="message" class="form-control" rows="5" 
-                                  required minlength="10" maxlength="1000" 
-                                  placeholder="Tell us about your goals, questions, or any specific requirements..."><?php
-// Define system access for includes
-define('SYSTEM_ACCESS', true);
- echo htmlspecialchars($_POST['message'] ?? ''); ?></textarea>
+                                  maxlength="1000" 
+                                  placeholder="Tell us about your goals, questions, or any specific requirements (optional)..."><?php  echo htmlspecialchars($_POST['message'] ?? ''); ?></textarea>
                         <div class="character-count">
                             <span id="char-count">0</span>/1000 characters
                         </div>

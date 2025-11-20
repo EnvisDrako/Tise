@@ -141,7 +141,7 @@ echo "<li><a href='$base_url' target='_blank'>Public Website</a></li>";
 echo "<li><a href='$base_url/login.php' target='_blank'>Login Page</a></li>";
 echo "<li><a href='$base_url/admin/' target='_blank'>Admin Portal</a></li>";
 echo "<li><a href='$base_url/institution/' target='_blank'>Faculty Portal</a></li>";
-echo "<li><a href='$base_url/enquiry/' target='_blank'>Enquirer Portal</a></li>";
+echo "<li><a href='$base_url/enquirer-portal/' target='_blank'>Enquirer Portal</a></li>";
 echo "<li><a href='$base_url/api/' target='_blank'>API Documentation</a></li>";
 echo "</ul>";
 

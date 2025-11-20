@@ -463,10 +463,6 @@ function enhanceStructuredData() {
     // Add page-specific structured data
     if (currentPage.includes('/courses')) {
         addCourseStructuredData();
-    } else if (currentPage.includes('/blog')) {
-        addArticleStructuredData();
-    } else if (currentPage.includes('/testimonials')) {
-        addReviewStructuredData();
     }
 }
 
@@ -490,64 +486,7 @@ function addCourseStructuredData() {
     document.head.appendChild(script);
 }
 
-function addArticleStructuredData() {
-    // Enhanced for blog articles
-    const articles = document.querySelectorAll('.blog-card');
-    articles.forEach(article => {
-        const title = article.querySelector('h3 a')?.textContent;
-        const description = article.querySelector('p')?.textContent;
-        
-        if (title && description) {
-            const articleData = {
-                "@context": "https://schema.org",
-                "@type": "Article",
-                "headline": title,
-                "description": description,
-                "author": {
-                    "@type": "Organization",
-                    "name": "EduPortal"
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "EduPortal",
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": "https://eduportal.com/images/logo.png"
-                    }
-                }
-            };
-            
-            const script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.textContent = JSON.stringify(articleData);
-            document.head.appendChild(script);
-        }
-    });
-}
 
-function addReviewStructuredData() {
-    // Enhanced for testimonials
-    const testimonials = document.querySelectorAll('.testimonial-card');
-    testimonials.forEach(testimonial => {
-        const author = testimonial.querySelector('.student-info h3')?.textContent;
-        const reviewText = testimonial.querySelector('.testimonial-content p')?.textContent;
-        const rating = testimonial.querySelectorAll('.rating i.fas').length;
-        
-        if (author && reviewText) {
-            const reviewData = {
-                "@context": "https://schema.org",
-                "@type": "Review",
-                "author": {
-                    "@type": "Person",
-                    "name": author
-                },
-                "reviewBody": reviewText,
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": rating,
-                    "bestRating": 5
-                },
-                "itemReviewed": {
                     "@type": "EducationalOrganization",
                     "name": "EduPortal"
                 }
@@ -654,9 +593,9 @@ function initializeContentSharing() {
             e.preventDefault();
             
             const platform = this.classList[1]; // facebook, twitter, etc.
-            const title = this.closest('.card, .course-card, .blog-card, .testimonial-card')
+            const title = this.closest('.card, .course-card')
                 ?.querySelector('h3')?.textContent || document.title;
-            const description = this.closest('.card, .course-card, .blog-card, .testimonial-card')
+            const description = this.closest('.card, .course-card')
                 ?.querySelector('p')?.textContent || '';
             const url = window.location.href;
             

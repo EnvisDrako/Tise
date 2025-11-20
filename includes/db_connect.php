@@ -12,13 +12,14 @@ if (!defined('SYSTEM_ACCESS')) {
 // Include configuration
 require_once __DIR__ . '/config.php';
 
-class DatabaseConnection {
-    private static $instance = null;
-    private $connection;
-    private $host;
-    private $db_name;
-    private $username;
-    private $password;
+if (!class_exists('DatabaseConnection')) {
+    class DatabaseConnection {
+        private static $instance = null;
+        private $connection;
+        private $host;
+        private $db_name;
+        private $username;
+        private $password;
     
     private function __construct() {
         $this->host = DB_HOST;
@@ -182,33 +183,42 @@ class DatabaseConnection {
     public function __wakeup() {
         throw new Exception("Cannot unserialize singleton");
     }
+    }
 }
 
 /**
  * Helper function to get database connection
  */
-function getDB() {
-    return DatabaseConnection::getInstance()->getConnection();
+if (!function_exists('getDB')) {
+    function getDB() {
+        return DatabaseConnection::getInstance()->getConnection();
+    }
 }
 
 /**
  * Helper function to execute query
  */
-function executeQuery($query, $params = []) {
-    return DatabaseConnection::getInstance()->execute($query, $params);
+if (!function_exists('executeQuery')) {
+    function executeQuery($query, $params = []) {
+        return DatabaseConnection::getInstance()->execute($query, $params);
+    }
 }
 
 /**
  * Helper function to fetch one row
  */
-function fetchOne($query, $params = []) {
-    return DatabaseConnection::getInstance()->fetchOne($query, $params);
+if (!function_exists('fetchOne')) {
+    function fetchOne($query, $params = []) {
+        return DatabaseConnection::getInstance()->fetchOne($query, $params);
+    }
 }
 
 /**
  * Helper function to fetch all rows
  */
-function fetchAll($query, $params = []) {
-    return DatabaseConnection::getInstance()->fetchAll($query, $params);
+if (!function_exists('fetchAll')) {
+    function fetchAll($query, $params = []) {
+        return DatabaseConnection::getInstance()->fetchAll($query, $params);
+    }
 }
 ?>

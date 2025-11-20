@@ -188,44 +188,6 @@ include __DIR__ . '/../includes/public_header.php';
     </div>
 </section>
 
-<section class="testimonials-preview section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Student Success Stories</h2>
-            <p>Hear from our graduates who have achieved their career goals</p>
-        </div>
-        <div class="testimonials-slider">
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p>"The web development course transformed my career. The practical approach and expert guidance helped me land my dream job."</p>
-                </div>
-                <div class="testimonial-author">
-                    <img src="<?php echo asset('images/student-1.jpg'); ?>" alt="Sarah Johnson" data-src="<?php echo asset('images/student-1.jpg'); ?>" class="lazy">
-                    <div class="author-info">
-                        <h4>Sarah Johnson</h4>
-                        <span>Web Developer at TechCorp</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <p>"The data science program provided me with the skills and confidence to transition into a high-paying analytics role."</p>
-                </div>
-                <div class="testimonial-author">
-                    <img src="<?php echo asset('images/student-2.jpg'); ?>" alt="Michael Chen" data-src="<?php echo asset('images/student-2.jpg'); ?>" class="lazy">
-                    <div class="author-info">
-                        <h4>Michael Chen</h4>
-                        <span>Data Analyst at DataFlow</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center">
-            <a href="<?php echo url('testimonials'); ?>" class="btn btn-secondary">Read More Stories</a>
-        </div>
-    </div>
-</section>
-
 <style>
 .hero-section {
     background: linear-gradient(135deg, rgba(52, 152, 219, 0.9), rgba(44, 62, 80, 0.9)), url('<?php echo asset('images/hero-bg.jpg'); ?>');
@@ -327,49 +289,6 @@ include __DIR__ . '/../includes/public_header.php';
     color: #666;
 }
 
-.testimonials-slider {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.testimonial-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.testimonial-content p {
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-}
-
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.testimonial-author img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.author-info h4 {
-    margin-bottom: 0.25rem;
-    color: #2c3e50;
-}
-
-.author-info span {
-    color: #666;
-    font-size: 0.9rem;
-}
-
 .text-center {
     text-align: center;
     margin-top: 2rem;
@@ -383,10 +302,6 @@ include __DIR__ . '/../includes/public_header.php';
     .hero-buttons {
         flex-direction: column;
         align-items: center;
-    }
-    
-    .testimonials-slider {
-        grid-template-columns: 1fr;
     }
 }
 </style>

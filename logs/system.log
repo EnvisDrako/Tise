@@ -151,3 +151,15 @@
 [2025-11-20 00:52:06] [WARNING] Unauthorized access attempt to admin area - not logged in, IP: ::1
 [2025-11-20 00:58:31] [INFO] Admin created new user: tvfrg (Role: faculty)
 [2025-11-20 00:59:47] [INFO] Admin added student: Harisankar G (ID: fb6)
+[2025-11-19 23:04:58] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-19 23:05:19] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-19 23:18:52] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-19 23:19:01] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-19 23:20:23] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-19 23:20:34] [WARNING] Unauthorized access attempt to enquirer area - not logged in, IP: ::1
+[2025-11-20 00:48:16] [INFO] Admin updated user ID: 2
+[2025-11-20 00:48:23] [INFO] Admin assigned enquiry ID 1 to user ID 2
+[2025-11-20 00:53:03] [INFO] User logout: ID 1, Username: System Administrator, Role: admin, IP: ::1
+[2025-11-20 00:58:47] [INFO] Admin created new user: cherin (Role: faculty)
+[2025-11-20 00:59:11] [ERROR] Error adding student: Database operation failed
+[2025-11-20 00:59:30] [ERROR] Error adding student: Database operation failed

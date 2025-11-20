@@ -246,13 +246,13 @@ include '../includes/public_header.php';
             <p>Send us a quick message and we'll get back to you within 24 hours</p>
         </div>
         <div class="quick-contact-container">
-            <form class="quick-contact-form" method="POST" action="/enquiry">
+            <form class="quick-contact-form" method="POST" action="<?php echo url('enquiry'); ?>">
                 <div class="form-row">
                     <div class="form-group">
                         <input type="text" name="full_name" placeholder="Your Name" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email" class="form-control" required>
+                        <input type="email" name="email" placeholder="Your Email (Optional)" class="form-control">
                     </div>
                 </div>
                 <div class="form-row">
@@ -273,13 +273,13 @@ include '../includes/public_header.php';
                     </div>
                 </div>
                 <div class="form-group">
-                    <textarea name="message" placeholder="Your Message" class="form-control" rows="4" required></textarea>
+                    <textarea name="message" placeholder="Your Message (Optional)" class="form-control" rows="4"></textarea>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-paper-plane"></i> Send Message
                     </button>
-                    <p class="form-note">Or <a href="/enquiry">fill out our detailed enquiry form</a></p>
+                    <p class="form-note">Or <a href="<?php echo url('enquiry'); ?>">fill out our detailed enquiry form</a></p>
                 </div>
             </form>
             
@@ -307,7 +307,7 @@ include '../includes/public_header.php';
                             <span>Instant support available</span>
                         </div>
                     </a>
-                    <a href="/enquiry" class="alternative-option">
+                    <a href="<?php echo url('enquiry'); ?>" class="alternative-option">
                         <i class="fas fa-file-alt"></i>
                         <div>
                             <strong>Detailed Form</strong>
