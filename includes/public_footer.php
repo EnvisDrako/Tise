@@ -84,7 +84,6 @@
                     <li><a href="<?php echo url('courses'); ?>">Courses</a></li>
                     <li><a href="<?php echo url('trainers'); ?>">Trainers</a></li>
                     <li><a href="<?php echo url('placements'); ?>">Placements</a></li>
-                    <li><a href="<?php echo url('testimonials'); ?>">Success Stories</a></li>
                     <li><a href="<?php echo url('gallery'); ?>">Gallery</a></li>
                 </ul>
             </div>
@@ -93,7 +92,6 @@
                 <ul>
                     <li><a href="<?php echo url('downloads'); ?>">Downloads</a></li>
                     <li><a href="<?php echo url('notices'); ?>">Notices</a></li>
-                    <li><a href="<?php echo url('blog'); ?>">Blog</a></li>
                     <li><a href="<?php echo url('affiliations'); ?>">Affiliations</a></li>
                     <li><a href="<?php echo url('sitemap.xml'); ?>">Sitemap</a></li>
                     <li><a href="<?php echo url('privacy-policy'); ?>">Privacy Policy</a></li>

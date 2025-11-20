@@ -5,7 +5,7 @@
 RewriteEngine On
 
 # Redirect everything to public/ except if already there
-RewriteCond %{REQUEST_URI} !^/integrated-crm/public/
+RewriteCond %{REQUEST_URI} !^/Tise/public/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ public/$1 [L]

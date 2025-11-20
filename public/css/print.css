@@ -29,8 +29,6 @@
     .notification,
     .hero-buttons,
     .course-card .btn,
-    .blog-footer .read-more,
-    .testimonial-footer .achievement,
     video,
     iframe,
     .lazy {
@@ -75,9 +73,7 @@
     /* Page breaks */
     .page-header,
     .section,
-    .course-card,
-    .testimonial-card,
-    .blog-card {
+    .course-card {
         page-break-inside: avoid;
         margin-bottom: 1em;
     }
@@ -109,9 +105,7 @@
     
     /* Cards and content blocks */
     .card,
-    .course-card,
-    .testimonial-card,
-    .blog-card {
+    .course-card {
         border: 1pt solid #ccc !important;
         padding: 1em !important;
         margin-bottom: 1em !important;
@@ -143,40 +137,6 @@
         padding: 0.2em 0.5em;
         border: 1pt solid #ccc;
         font-size: 10pt;
-    }
-    
-    /* Testimonials */
-    .testimonial-header {
-        border-bottom: 1pt solid #ccc;
-        padding-bottom: 0.5em;
-        margin-bottom: 0.5em;
-    }
-    
-    .student-info h3 {
-        margin-bottom: 0.25em;
-    }
-    
-    .course-info,
-    .graduation-info,
-    .current-role {
-        font-size: 10pt;
-        margin-bottom: 0.25em;
-    }
-    
-    /* Blog posts */
-    .blog-meta {
-        font-size: 10pt;
-        border-bottom: 1pt solid #ccc;
-        padding-bottom: 0.25em;
-        margin-bottom: 0.5em;
-    }
-    
-    .blog-tags .tag {
-        display: inline-block;
-        margin-right: 0.5em;
-        padding: 0.1em 0.3em;
-        border: 1pt solid #ccc;
-        font-size: 9pt;
     }
     
     /* Contact information */

@@ -52,14 +52,6 @@
         <priority>0.6</priority>
     </url>
     
-    <!-- Testimonials Page -->
-    <url>
-        <loc>https://eduportal.com/testimonials</loc>
-        <lastmod>2024-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    
     <!-- Notices Page -->
     <url>
         <loc>https://eduportal.com/notices</loc>
@@ -82,14 +74,6 @@
         <lastmod>2024-01-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
-    </url>
-    
-    <!-- Blog Page -->
-    <url>
-        <loc>https://eduportal.com/blog</loc>
-        <lastmod>2024-01-01</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.8</priority>
     </url>
     
     <!-- Contact Page -->
