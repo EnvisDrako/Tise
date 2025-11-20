@@ -102,7 +102,7 @@ class WorkflowTester {
         $workflow = [
             'Access Home Page',
             'Browse Course Information',
-            'View Gallery and Testimonials',
+            'View Gallery',
             'Submit Enquiry Form',
             'Upload Documents',
             'Receive Confirmation'
@@ -274,8 +274,8 @@ class WorkflowTester {
             case 'Browse Course Information':
                 return $this->testPageAccess('/courses.php');
                 
-            case 'View Gallery and Testimonials':
-                return $this->testPageAccess('/gallery.php') && $this->testPageAccess('/testimonials.php');
+            case 'View Gallery':
+                return $this->testPageAccess('/gallery.php');
                 
             case 'Submit Enquiry Form':
                 return $this->testEnquirySubmission();

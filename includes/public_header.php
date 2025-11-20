@@ -143,9 +143,7 @@ if (isset($course_data) && is_array($course_data)) {
                         </a>
                         <div class="dropdown-menu">
                             <a href="<?php echo url('gallery'); ?>" class="dropdown-item">Photo Gallery</a>
-                            <a href="<?php echo url('testimonials'); ?>" class="dropdown-item">Testimonials</a>
                             <a href="<?php echo url('placements'); ?>" class="dropdown-item">Placements</a>
-                            <a href="<?php echo url('blog'); ?>" class="dropdown-item">Blog</a>
                         </div>
                     </div>
                     

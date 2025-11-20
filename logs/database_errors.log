@@ -112,3 +112,20 @@
         
 [2025-11-18 07:33:00] Query execution failed: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'performed_by' cannot be null | Query: DELETE FROM users WHERE id IN (?)
 [2025-11-18 07:33:48] Query execution failed: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'performed_by' cannot be null | Query: DELETE FROM users WHERE id IN (?)
+[2025-11-19 22:39:25] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[2025-11-19 22:39:30] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[2025-11-19 22:42:57] Database connection failed: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)
+[2025-11-20 00:59:11] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'enrollment_date' in 'field list' | Query: 
+            INSERT INTO students (
+                student_id, full_name, email, phone, course, batch_year, 
+                institution_id, enrollment_date, status, registered_by, created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        
+[2025-11-20 00:59:30] Query execution failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'enrollment_date' in 'field list' | Query: 
+            INSERT INTO students (
+                student_id, full_name, email, phone, course, batch_year, 
+                institution_id, enrollment_date, status, registered_by, created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        

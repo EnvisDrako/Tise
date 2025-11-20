@@ -176,7 +176,7 @@ function initializeFilters() {
     }
 
     function checkDateRange(item, rangeFilter) {
-        const dateElement = item.querySelector('.blog-date, .graduation-info, .gallery-meta .date');
+        const dateElement = item.querySelector('.gallery-meta .date');
         if (!dateElement) return true;
         
         const dateText = dateElement.textContent;
@@ -221,9 +221,7 @@ function initializeFilters() {
 
     function getItemType() {
         if (document.querySelector('.course-card')) return 'courses';
-        if (document.querySelector('.testimonial-card')) return 'testimonials';
         if (document.querySelector('.gallery-item')) return 'media items';
-        if (document.querySelector('.blog-card')) return 'articles';
         return 'results';
     }
 
@@ -308,7 +306,7 @@ function initializeSearch() {
     }
 
     function checkDateRange(item, rangeFilter) {
-        const dateElement = item.querySelector('.blog-date, .graduation-info, .gallery-meta .date');
+        const dateElement = item.querySelector('.gallery-meta .date');
         if (!dateElement) return true;
         
         const dateText = dateElement.textContent;
@@ -353,27 +351,14 @@ function initializeSearch() {
         const courseFaculty = item.querySelector('.course-faculty')?.textContent || '';
         const courseFeatures = Array.from(item.querySelectorAll('.feature')).map(f => f.textContent).join(' ');
         
-        // Testimonial cards
-        const studentName = item.querySelector('.student-info h3')?.textContent || '';
-        const currentRole = item.querySelector('.current-role')?.textContent || '';
-        const testimonialContent = item.querySelector('.testimonial-content p')?.textContent || '';
-        
         // Gallery items
         const galleryTitle = item.querySelector('.gallery-info h3')?.textContent || '';
         const galleryDescription = item.querySelector('.gallery-info p')?.textContent || '';
         
-        // Blog articles
-        const blogTitle = item.querySelector('h3 a')?.textContent || '';
-        const blogContent = item.querySelector('.blog-content p')?.textContent || '';
-        const blogTags = Array.from(item.querySelectorAll('.tag')).map(t => t.textContent).join(' ');
-        const blogAuthor = item.querySelector('.blog-author')?.textContent || '';
-        
         // Combine all searchable content
         const allContent = [
             courseTitle, courseDescription, courseFaculty, courseFeatures,
-            studentName, currentRole, testimonialContent,
-            galleryTitle, galleryDescription,
-            blogTitle, blogContent, blogTags, blogAuthor
+            galleryTitle, galleryDescription
         ].join(' ').toLowerCase();
         
         // Check if search term matches any content
@@ -391,9 +376,7 @@ function initializeSearch() {
 
     function getItemType() {
         if (document.querySelector('.course-card')) return 'courses';
-        if (document.querySelector('.testimonial-card')) return 'testimonials';
         if (document.querySelector('.gallery-item')) return 'media items';
-        if (document.querySelector('.blog-card')) return 'articles';
         return 'results';
     }
 }
