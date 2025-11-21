@@ -1,49 +1,16 @@
-# Security configuration for uploads directory
-Options -Indexes
-Options -ExecCGI
-
-# --------------------------------------------------
-# Block execution of PHP and other scripts
-# --------------------------------------------------
-<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
-    Require all denied
-</FilesMatch>
-
-# --------------------------------------------------
-# Only allow safe file extensions
-# --------------------------------------------------
-<FilesMatch "\.(jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx|txt)$">
-    Require all granted
-</FilesMatch>
-
-# --------------------------------------------------
-# Block everything else by default
-# --------------------------------------------------
-<FilesMatch ".*">
-    Require all denied
-</FilesMatch>
-
-# --------------------------------------------------
-# Set proper MIME types for allowed files
-# --------------------------------------------------
-<IfModule mod_mime.c>
-    AddType image/jpeg .jpg .jpeg
-    AddType image/png .png
-    AddType image/gif .gif
-    AddType application/pdf .pdf
-    AddType application/msword .doc
-    AddType application/vnd.openxmlformats-officedocument.wordprocessingml.document .docx
-    AddType application/vnd.ms-excel .xls
-    AddType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet .xlsx
-    AddType text/plain .txt
-</IfModule>
-
-# --------------------------------------------------
-# Prevent Hotlinking (change yourdomain.com to actual domain)
-# --------------------------------------------------
+# Allow access to uploaded images
 <IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^https?://(www\.)?yourdomain\.com [NC]
-RewriteRule \.(jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx)$ - [F,L]
+    RewriteEngine Off
 </IfModule>
+
+# Allow image files
+<FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Deny access to PHP files
+<FilesMatch "\.php$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

@@ -4,6 +4,19 @@ define('SYSTEM_ACCESS', true);
 
 $page_title = "Gallery";
 $page_description = "Explore our campus facilities, events, and student activities through our photo and video gallery";
+
+// Get gallery events from database
+require_once '../includes/db_connect.php';
+
+try {
+    $db = DatabaseConnection::getInstance();
+    $pdo = $db->getConnection();
+    $stmt = $pdo->query("SELECT * FROM gallery_events WHERE status='active' ORDER BY event_date DESC, created_at DESC");
+    $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $events = [];
+}
+
 include '../includes/public_header.php';
 ?>
 
@@ -58,195 +71,79 @@ include '../includes/public_header.php';
 
 <section class="gallery-grid section">
     <div class="container">
+        <?php if (empty($events)): ?>
+            <div class="empty-state">
+                <i class="fas fa-images"></i>
+                <h3>No Gallery Events Yet</h3>
+                <p>Gallery events will be displayed here once they are added by the admin.</p>
+            </div>
+        <?php else: ?>
         <div class="gallery-container">
-            <!-- Photo Gallery Item 1 -->
+            <?php foreach ($events as $event): 
+                // Get photos for this event
+                $stmt = $pdo->prepare("SELECT * FROM gallery_photos WHERE event_id=? ORDER BY is_thumbnail DESC, display_order ASC LIMIT 1");
+                $stmt->execute([$event['id']]);
+                $firstPhoto = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $thumbnailUrl = $event['thumbnail_url'] ?: ($firstPhoto['image_url'] ?? '');
+                
+                // Fix image URL path
+                if ($thumbnailUrl) {
+                    if (strpos($thumbnailUrl, 'http://') === 0 || strpos($thumbnailUrl, 'https://') === 0) {
+                        // External URL - use as is
+                    } elseif (strpos($thumbnailUrl, '/uploads/') === 0) {
+                        // Absolute path from root - convert to relative
+                        $thumbnailUrl = '.' . $thumbnailUrl;
+                    } elseif (strpos($thumbnailUrl, 'uploads/') === 0) {
+                        // Relative path without leading dot
+                        $thumbnailUrl = './' . $thumbnailUrl;
+                    }
+                }
+            ?>
             <div class="gallery-item filterable-item searchable-item" 
-                 data-category="facilities" 
-                 data-media-type="photo" 
-                 data-date-range="2024">
+                 data-category="<?php echo htmlspecialchars($event['category'] ?? 'general'); ?>">
                 <div class="gallery-image">
-                    <img src="/images/gallery-computer-lab.jpg" alt="Modern Computer Lab" data-src="/images/gallery-computer-lab.jpg" class="lazy">
+                    <?php if ($thumbnailUrl): ?>
+                        <img src="<?php echo htmlspecialchars($thumbnailUrl); ?>" 
+                             alt="<?php echo htmlspecialchars($event['title']); ?>"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'; console.error('Failed to load:', '<?php echo htmlspecialchars($thumbnailUrl); ?>');">
+                        <div class="placeholder-image" style="display:none;">
+                            <i class="fas fa-image-slash"></i>
+                        </div>
+                    <?php else: ?>
+                        <div class="placeholder-image">
+                            <i class="fas fa-images"></i>
+                        </div>
+                    <?php endif; ?>
                     <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h3>Modern Computer Lab</h3>
-                            <p>State-of-the-art computer lab with latest hardware and software</p>
-                            <div class="gallery-meta">
-                                <span class="category">Facilities</span>
-                                <span class="date">March 2024</span>
-                            </div>
-                        </div>
-                        <div class="gallery-actions">
-                            <button class="view-btn" data-image="/images/gallery-computer-lab.jpg">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="download-btn" data-image="/images/gallery-computer-lab.jpg">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
+                        <button class="view-btn" onclick="viewEvent(<?php echo $event['id']; ?>)">
+                            <i class="fas fa-eye"></i> View Album
+                        </button>
                     </div>
-                    <div class="media-type-badge">
-                        <i class="fas fa-camera"></i>
+                </div>
+                <div class="gallery-card-content">
+                    <h3><?php echo htmlspecialchars($event['title']); ?></h3>
+                    <?php if ($event['description']): ?>
+                        <p class="description"><?php echo htmlspecialchars(substr($event['description'], 0, 100)); ?><?php echo strlen($event['description']) > 100 ? '...' : ''; ?></p>
+                    <?php endif; ?>
+                    <div class="gallery-meta">
+                        <?php 
+                        // Only show date if it's valid and not null/empty
+                        if ($event['event_date'] && $event['event_date'] != '0000-00-00' && strtotime($event['event_date']) > 0): 
+                        ?>
+                            <span class="date"><i class="fas fa-calendar"></i> <?php echo date('M j, Y', strtotime($event['event_date'])); ?></span>
+                        <?php endif; ?>
+                        <span class="count"><i class="fas fa-images"></i> <?php echo $event['photo_count']; ?> photos</span>
+                        <?php if ($event['category']): ?>
+                            <span class="category"><i class="fas fa-tag"></i> <?php echo htmlspecialchars($event['category']); ?></span>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-
-            <!-- Video Gallery Item 2 -->
-            <div class="gallery-item filterable-item searchable-item" 
-                 data-category="events" 
-                 data-media-type="video" 
-                 data-date-range="recent">
-                <div class="gallery-image">
-                    <img src="/images/gallery-graduation-ceremony.jpg" alt="Graduation Ceremony 2024" data-src="/images/gallery-graduation-ceremony.jpg" class="lazy">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h3>Graduation Ceremony 2024</h3>
-                            <p>Highlights from our annual graduation ceremony celebrating student achievements</p>
-                            <div class="gallery-meta">
-                                <span class="category">Events</span>
-                                <span class="date">December 2024</span>
-                            </div>
-                        </div>
-                        <div class="gallery-actions">
-                            <button class="play-btn" data-video="/videos/graduation-2024.mp4">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <button class="download-btn" data-video="/videos/graduation-2024.mp4">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="media-type-badge">
-                        <i class="fas fa-video"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Photo Gallery Item 3 -->
-            <div class="gallery-item filterable-item searchable-item" 
-                 data-category="activities" 
-                 data-media-type="photo" 
-                 data-date-range="2024">
-                <div class="gallery-image">
-                    <img src="/images/gallery-coding-workshop.jpg" alt="Coding Workshop" data-src="/images/gallery-coding-workshop.jpg" class="lazy">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h3>Interactive Coding Workshop</h3>
-                            <p>Students participating in hands-on coding exercises and collaborative projects</p>
-                            <div class="gallery-meta">
-                                <span class="category">Student Activities</span>
-                                <span class="date">November 2024</span>
-                            </div>
-                        </div>
-                        <div class="gallery-actions">
-                            <button class="view-btn" data-image="/images/gallery-coding-workshop.jpg">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="download-btn" data-image="/images/gallery-coding-workshop.jpg">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="media-type-badge">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Photo Gallery Item 4 -->
-            <div class="gallery-item filterable-item searchable-item" 
-                 data-category="facilities" 
-                 data-media-type="photo" 
-                 data-date-range="2024">
-                <div class="gallery-image">
-                    <img src="/images/gallery-library.jpg" alt="Digital Library" data-src="/images/gallery-library.jpg" class="lazy">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h3>Digital Library & Study Area</h3>
-                            <p>Quiet study spaces with access to digital resources and research materials</p>
-                            <div class="gallery-meta">
-                                <span class="category">Facilities</span>
-                                <span class="date">February 2024</span>
-                            </div>
-                        </div>
-                        <div class="gallery-actions">
-                            <button class="view-btn" data-image="/images/gallery-library.jpg">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="download-btn" data-image="/images/gallery-library.jpg">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="media-type-badge">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Gallery Item 5 -->
-            <div class="gallery-item filterable-item searchable-item" 
-                 data-category="workshops" 
-                 data-media-type="video" 
-                 data-date-range="2024">
-                <div class="gallery-image">
-                    <img src="/images/gallery-design-workshop.jpg" alt="Design Workshop" data-src="/images/gallery-design-workshop.jpg" class="lazy">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h3>UI/UX Design Workshop</h3>
-                            <p>Professional design workshop featuring industry experts and practical exercises</p>
-                            <div class="gallery-meta">
-                                <span class="category">Workshops</span>
-                                <span class="date">October 2024</span>
-                            </div>
-                        </div>
-                        <div class="gallery-actions">
-                            <button class="play-btn" data-video="/videos/design-workshop-2024.mp4">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <button class="download-btn" data-video="/videos/design-workshop-2024.mp4">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="media-type-badge">
-                        <i class="fas fa-video"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Photo Gallery Item 6 -->
-            <div class="gallery-item filterable-item searchable-item" 
-                 data-category="campus" 
-                 data-media-type="photo" 
-                 data-date-range="2024">
-                <div class="gallery-image">
-                    <img src="/images/gallery-campus-life.jpg" alt="Campus Life" data-src="/images/gallery-campus-life.jpg" class="lazy">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h3>Vibrant Campus Life</h3>
-                            <p>Students enjoying recreational activities and social interactions on campus</p>
-                            <div class="gallery-meta">
-                                <span class="category">Campus Life</span>
-                                <span class="date">September 2024</span>
-                            </div>
-                        </div>
-                        <div class="gallery-actions">
-                            <button class="view-btn" data-image="/images/gallery-campus-life.jpg">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="download-btn" data-image="/images/gallery-campus-life.jpg">
-                                <i class="fas fa-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="media-type-badge">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
-    </div>
-</section>
+        <?php endif; ?>
+            </section>
 
 <!-- Image/Video Modal -->
 <div id="media-modal" class="modal">
@@ -267,6 +164,40 @@ include '../includes/public_header.php';
 </div>
 
 <style>
+.page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 0;
+}
+
+.page-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+}
+
+.section {
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
 .gallery-filter {
     background: #f8f9fa;
     padding: 2rem 0;
@@ -349,6 +280,9 @@ include '../includes/public_header.php';
     overflow: hidden;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    display: flex;
+    flex-direction: column;
 }
 
 .gallery-item:hover {
@@ -379,11 +313,10 @@ include '../includes/public_header.php';
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%);
+    background: rgba(0,0,0,0.6);
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1.5rem;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -392,35 +325,82 @@ include '../includes/public_header.php';
     opacity: 1;
 }
 
-.gallery-info {
-    margin-top: auto;
+.view-btn {
+    background: white;
+    color: #3498db;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
-.gallery-info h3 {
+.view-btn:hover {
+    background: #3498db;
     color: white;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+    transform: scale(1.05);
 }
 
-.gallery-info p {
-    color: rgba(255,255,255,0.9);
-    font-size: 0.9rem;
-    line-height: 1.4;
+.gallery-card-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-card-content h3 {
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.gallery-card-content .description {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
     margin-bottom: 1rem;
+    flex: 1;
 }
 
 .gallery-meta {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: auto;
 }
 
 .gallery-meta span {
-    background: rgba(255,255,255,0.2);
-    color: white;
-    padding: 0.25rem 0.75rem;
+    background: #f0f0f0;
+    color: #555;
+    padding: 0.4rem 0.9rem;
     border-radius: 15px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.gallery-meta span i {
+    font-size: 0.9rem;
+}
+
+.gallery-meta .date {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.gallery-meta .count {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.gallery-meta .category {
+    background: #e8f5e9;
+    color: #388e3c;
 }
 
 .gallery-actions {
@@ -460,6 +440,72 @@ include '../includes/public_header.php';
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    margin: 2rem 0;
+}
+
+.empty-state i {
+    font-size: 6rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.empty-state h3 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.empty-state p {
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.placeholder-image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
 }
 
 /* Modal Styles */
@@ -537,6 +583,11 @@ include '../includes/public_header.php';
 </style>
 
 <script>
+// View event function
+function viewEvent(eventId) {
+    window.location.href = 'gallery-event.php?id=' + eventId;
+}
+
 // Gallery modal functionality
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('media-modal');
