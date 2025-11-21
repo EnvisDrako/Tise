@@ -77,21 +77,34 @@ CREATE TABLE students (
 );
 
 -- Create enquiries table
+-- Replace the existing CREATE TABLE enquiries statement with this:
 CREATE TABLE enquiries (
     id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(100),
-    phone VARCHAR(20) NOT NULL,
-    course_interest VARCHAR(100),
-    message TEXT,
-    status ENUM('new', 'assigned', 'contacted', 'interested', 'not_interested', 'enrolled') DEFAULT 'new',
+    phone VARCHAR(20),
+    
+    -- 👇 New Form Fields from your Public Page
+    education_level VARCHAR(50) NULL,
+    experience_level VARCHAR(50) NULL,
+    preferred_schedule VARCHAR(50) NULL,
+    
+    course_interest VARCHAR(100) NULL,
+    address TEXT NOT NULL,
+    notes TEXT NULL,
+    
+    -- 👇 Management & Tracking Fields from your original plan
+    status ENUM('new', 'assigned', 'contacted', 'interested', 'not_interested', 'enrolled', 'archived') DEFAULT 'new',
     assigned_to_user_id INT NULL,
-    documents_path VARCHAR(255),
     priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
-    source VARCHAR(50) DEFAULT 'website',
+    source VARCHAR(50) NULL, -- e.g., 'Website', 'Social Media'
+    last_contact_date TIMESTAMP NULL,
+    
+    -- Metadata
+    documents_path VARCHAR(255) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    last_contact_date TIMESTAMP NULL,
+    
     FOREIGN KEY (assigned_to_user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 

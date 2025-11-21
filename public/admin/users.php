@@ -30,12 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $email = sanitizeInput($_POST['email']);
                     $phone = sanitizeInput($_POST['phone']);
                     
-                    // Validation
-                    if (empty($username) || empty($password) || empty($role) || empty($full_name) || empty($email)) {
-                        throw new Exception("All required fields must be filled.");
+                    // Validation (Email is now optional)
+                    if (empty($username) || empty($password) || empty($role) || empty($full_name)) { // Removed check for empty($email)
+                        throw new Exception("Username, Password, Role, and Full Name are required.");
                     }
-                    
-                    if (!isValidEmail($email)) {
+
+                    // Only validate email format IF an email was provided
+                    if (!empty($email) && !isValidEmail($email)) { 
                         throw new Exception("Invalid email address.");
                     }
                     
@@ -519,8 +520,8 @@ renderAdminHeader($pageTitle);
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="create_email" class="form-label">Email *</label>
-                            <input type="email" name="email" id="create_email" class="form-control" required>
+                            <label for="create_email" class="form-label">Email</label>
+                            <input type="email" name="email" id="create_email" class="form-control">
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="create_phone" class="form-label">Phone</label>

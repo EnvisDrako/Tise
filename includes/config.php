@@ -25,7 +25,7 @@ define('DB_HOST', 'localhost');
 // --- FIXED: Use the correct database name ---
 define('DB_NAME', 'integrated_crm'); 
 define('DB_USER', 'root');  // Default XAMPP MySQL user
-define('DB_PASS', '');      // Default XAMPP MySQL password (empty)
+define('DB_PASS', 'root');      // Default XAMPP MySQL password (empty)
 define('DB_CHARSET', 'utf8mb4');
 
 // System configuration
