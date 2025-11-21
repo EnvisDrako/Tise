@@ -273,7 +273,10 @@ include '../includes/public_header.php';
                     </div>
                 </div>
                 <div class="form-group">
-                    <textarea name="message" placeholder="Your Message (Optional)" class="form-control" rows="4"></textarea>
+                    <textarea name="address" placeholder="Your Address (Full Street/City)" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Additional Message / Goals (Optional)" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">

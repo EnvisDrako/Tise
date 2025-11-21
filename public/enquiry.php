@@ -92,22 +92,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $stmt = $pdo->prepare("
                 INSERT INTO enquiries (
-                    full_name, email, phone, course_interest, message, 
-                    education_level, experience_level, preferred_schedule, 
-                    documents_path, status, created_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', NOW())
+                    full_name, email, phone, course_interest, 
+                    status, created_at
+                ) VALUES (?, ?, ?, ?, 'new', NOW())
             ");
             
             // Provide default values for optional fields
             $email = !empty($email) ? $email : 'noemail@provided.com';
-            $message = !empty($message) ? $message : 'No message provided';
-            $education_level = !empty($education_level) ? $education_level : 'Not specified';
-            $experience_level = !empty($experience_level) ? $experience_level : 'Not specified';
-            $preferred_schedule = !empty($preferred_schedule) ? $preferred_schedule : 'Not specified';
             
             $result = $stmt->execute([
-                $full_name, $email, $phone, $course_interest, $message,
-                $education_level, $experience_level, $preferred_schedule, $documents_path
+                $full_name, $email, $phone, $course_interest
             ]);
             
             if ($result) {
@@ -124,11 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         Email: $email
                         Phone: $phone
                         Course Interest: $course_interest
-                        Education Level: $education_level
-                        Experience Level: $experience_level
-                        Preferred Schedule: $preferred_schedule
-                        
-                        Message: $message
                     ";
                     
                     $headers = "From: noreply@eduportal.com\r\n";
@@ -296,13 +285,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" class="form-control" rows="5" 
-                                  maxlength="1000" 
-                                  placeholder="Tell us about your goals, questions, or any specific requirements (optional)..."><?php  echo htmlspecialchars($_POST['message'] ?? ''); ?></textarea>
-                        <div class="character-count">
-                            <span id="char-count">0</span>/1000 characters
-                        </div>
+                        <label for="address">Address (Full Street/City) <span class="text-danger">*</span></label>
+                        <textarea id="address" name="address" class="form-control" rows="3" 
+                                required 
+                                maxlength="255"
+                                placeholder="Enter your full address, including city. This field is compulsory."><?php echo htmlspecialchars($_POST['address'] ?? ''); ?></textarea>
+                        <div class="field-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Additional Message / Goals (Optional)</label>
+                        <textarea id="notes" name="notes" class="form-control" rows="2" 
+                                placeholder="Tell us about your specific requirements, questions, or goals (optional)..."
+                                maxlength="1000"><?php echo htmlspecialchars($_POST['notes'] ?? ''); ?></textarea>
                         <div class="field-error"></div>
                     </div>
                     

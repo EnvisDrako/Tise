@@ -26,11 +26,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             throw new Exception("Full Name and at least one contact method (Email or Phone) are required.");
         }
         
-        // Insert enquiry
+        // Corrected Query - Use this:
         executeQuery("
-            INSERT INTO enquiries (full_name, email, phone, course_interest, message, status, assigned_to_user_id, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
-        ", [$full_name, $email, $phone, $course_interest, $message, $status, $assigned_to]);
+            INSERT INTO enquiries (
+                full_name, email, phone, address, notes, -- Columns updated
+                course_interest, education_level, preferred_schedule, status, assigned_to_user_id, created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ", [
+            $full_name, $email, $phone, 
+    
+            // 👇 The Corrected Variables (Assuming $address and $notes are now defined)
+            $address, $notes,
+    
+            $course_interest, $education_level, $preferred_schedule, $status, $assigned_to
+        ]);
         
         $success_message = "Enquiry added successfully!";
         logEvent("Admin added enquiry: {$full_name}", 'INFO');
