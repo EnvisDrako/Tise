@@ -128,10 +128,14 @@ function getAdminNavigation() {
         ],
         [
             'title' => 'Website Management',
-            'url' => url('admin/website/notices.php'),
+            'url' => url('admin/website/'),
             'icon' => 'fas fa-globe',
             'active' => strpos($_SERVER['PHP_SELF'], 'website/') !== false,
             'submenu' => [
+                ['title' => 'Dashboard', 'url' => url('admin/website/')],
+                ['title' => 'Courses', 'url' => url('admin/website/courses.php')],
+                ['title' => 'Trainers', 'url' => url('admin/website/trainers.php')],
+                ['title' => 'Gallery', 'url' => url('admin/website/gallery.php')],
                 ['title' => 'Notices', 'url' => url('admin/website/notices.php')],
                 ['title' => 'Downloads', 'url' => url('admin/website/downloads.php')],
                 ['title' => 'Placements', 'url' => url('admin/website/placements.php')]

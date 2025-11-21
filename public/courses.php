@@ -8,6 +8,18 @@ $page_keywords = "courses, programs, web development, data science, digital mark
 $page_image = "/images/course-web-development.jpg";
 $page_type = "website";
 
+// Get courses from database
+require_once '../includes/db_connect.php';
+
+try {
+    $db = DatabaseConnection::getInstance();
+    $pdo = $db->getConnection();
+    $stmt = $pdo->query("SELECT * FROM courses WHERE status='active' ORDER BY created_at DESC");
+    $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $courses = [];
+}
+
 // Structured data for courses page
 $course_data = [
     "@context" => "https://schema.org",
@@ -101,9 +113,12 @@ include '../includes/public_header.php';
                     <option value="high">Above $1000</option>
                 </select>
             </div>
-            <div class="search-group">
-                <input type="text" class="search-input" placeholder="Search courses, keywords, or faculty...">
-                <i class="fas fa-search"></i>
+            <div class="filter-group search-group">
+                <label for="search">Search:</label>
+                <div class="search-input-wrapper">
+                    <input type="text" id="search" class="search-input" placeholder="Search courses, keywords, or faculty...">
+                    <i class="fas fa-search"></i>
+                </div>
             </div>
         </div>
         <div class="results-count">Showing all courses</div>
@@ -112,277 +127,88 @@ include '../includes/public_header.php';
 
 <section class="courses-grid section">
     <div class="container">
+        <?php if (empty($courses)): ?>
+            <div class="empty-state">
+                <i class="fas fa-book"></i>
+                <h3>No Courses Available</h3>
+                <p>Courses will be displayed here once they are added by the admin.</p>
+            </div>
+        <?php else: ?>
         <div class="courses-container">
-            <!-- Web Development Course -->
+            <?php foreach ($courses as $course): 
+                $features = !empty($course['features']) ? explode(',', $course['features']) : [];
+            ?>
             <div class="course-card filterable-item searchable-item" 
-                 data-course-type="technical" 
-                 data-duration="medium" 
-                 data-level="beginner" 
-                 data-fee-range="medium">
+                 data-level="<?php echo strtolower($course['level']); ?>">
+                <?php if ($course['image_url']): ?>
                 <div class="course-image">
-                    <img src="/images/course-web-development.jpg" alt="Web Development" data-src="/images/course-web-development.jpg" class="lazy">
-                    <div class="course-badge">Popular</div>
+                    <img src="<?php echo htmlspecialchars($course['image_url']); ?>" alt="<?php echo htmlspecialchars($course['title']); ?>">
                 </div>
+                <?php endif; ?>
                 <div class="course-content">
-                    <div class="course-category">Technical</div>
-                    <h3>Full Stack Web Development</h3>
-                    <p>Master modern web technologies including HTML5, CSS3, JavaScript, React, Node.js, and database management.</p>
+                    <h3><?php echo htmlspecialchars($course['title']); ?></h3>
+                    <p><?php echo htmlspecialchars($course['description']); ?></p>
                     <div class="course-details">
                         <div class="detail-item">
                             <i class="fas fa-clock"></i>
-                            <span>6 Months</span>
+                            <span><?php echo htmlspecialchars($course['duration']); ?></span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-signal"></i>
-                            <span>Beginner</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>25 Students</span>
+                            <span><?php echo htmlspecialchars($course['level']); ?></span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-dollar-sign"></i>
-                            <span>$799</span>
+                            <span><?php echo htmlspecialchars($course['fee']); ?></span>
                         </div>
                     </div>
+                    <?php if ($course['faculty']): ?>
                     <div class="course-faculty">
-                        <strong>Faculty:</strong> Prof. John Smith, Ms. Sarah Wilson
+                        <strong>Faculty:</strong> <?php echo htmlspecialchars($course['faculty']); ?>
                     </div>
+                    <?php endif; ?>
+                    <?php if (!empty($features)): ?>
                     <div class="course-features">
-                        <span class="feature">Hands-on Projects</span>
-                        <span class="feature">Industry Mentorship</span>
-                        <span class="feature">Job Assistance</span>
+                        <?php foreach ($features as $feature): ?>
+                            <span class="feature"><?php echo htmlspecialchars(trim($feature)); ?></span>
+                        <?php endforeach; ?>
                     </div>
+                    <?php endif; ?>
                     <div class="course-actions">
-                        <a href="#" class="btn btn-primary">Enroll Now</a>
-                        <button class="btn-share" data-title="Full Stack Web Development Course" data-description="Master modern web technologies including HTML5, CSS3, JavaScript, React, Node.js" data-image="/images/course-web-development.jpg">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
+                        <a href="<?php echo url('enquiry'); ?>" class="btn btn-primary">Enroll Now</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Data Science Course -->
-            <div class="course-card filterable-item searchable-item" 
-                 data-course-type="technical" 
-                 data-duration="long" 
-                 data-level="intermediate" 
-                 data-fee-range="high">
-                <div class="course-image">
-                    <img src="/images/course-data-science.jpg" alt="Data Science" data-src="/images/course-data-science.jpg" class="lazy">
-                    <div class="course-badge">High Demand</div>
-                </div>
-                <div class="course-content">
-                    <div class="course-category">Technical</div>
-                    <h3>Data Science & Analytics</h3>
-                    <p>Learn Python, R, machine learning, statistical analysis, and data visualization with real-world projects.</p>
-                    <div class="course-details">
-                        <div class="detail-item">
-                            <i class="fas fa-clock"></i>
-                            <span>8 Months</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-signal"></i>
-                            <span>Intermediate</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>20 Students</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span>$1299</span>
-                        </div>
-                    </div>
-                    <div class="course-faculty">
-                        <strong>Faculty:</strong> Dr. Michael Chen, Prof. Lisa Anderson
-                    </div>
-                    <div class="course-features">
-                        <span class="feature">Real Data Projects</span>
-                        <span class="feature">Industry Tools</span>
-                        <span class="feature">Certification</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Digital Marketing Course -->
-            <div class="course-card filterable-item searchable-item" 
-                 data-course-type="business" 
-                 data-duration="medium" 
-                 data-level="beginner" 
-                 data-fee-range="low">
-                <div class="course-image">
-                    <img src="/images/course-digital-marketing.jpg" alt="Digital Marketing" data-src="/images/course-digital-marketing.jpg" class="lazy">
-                    <div class="course-badge">New</div>
-                </div>
-                <div class="course-content">
-                    <div class="course-category">Business</div>
-                    <h3>Digital Marketing Mastery</h3>
-                    <p>Master SEO, SEM, social media marketing, content strategy, email marketing, and analytics.</p>
-                    <div class="course-details">
-                        <div class="detail-item">
-                            <i class="fas fa-clock"></i>
-                            <span>4 Months</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-signal"></i>
-                            <span>Beginner</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>30 Students</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span>$499</span>
-                        </div>
-                    </div>
-                    <div class="course-faculty">
-                        <strong>Faculty:</strong> Ms. Emily Davis, Mr. Robert Taylor
-                    </div>
-                    <div class="course-features">
-                        <span class="feature">Live Campaigns</span>
-                        <span class="feature">Google Certified</span>
-                        <span class="feature">Portfolio Building</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Graphic Design Course -->
-            <div class="course-card filterable-item searchable-item" 
-                 data-course-type="creative" 
-                 data-duration="medium" 
-                 data-level="beginner" 
-                 data-fee-range="medium">
-                <div class="course-image">
-                    <img src="/images/course-graphic-design.jpg" alt="Graphic Design" data-src="/images/course-graphic-design.jpg" class="lazy">
-                </div>
-                <div class="course-content">
-                    <div class="course-category">Creative</div>
-                    <h3>Graphic Design & Visual Arts</h3>
-                    <p>Learn Adobe Creative Suite, typography, branding, logo design, and visual communication principles.</p>
-                    <div class="course-details">
-                        <div class="detail-item">
-                            <i class="fas fa-clock"></i>
-                            <span>5 Months</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-signal"></i>
-                            <span>Beginner</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>20 Students</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span>$699</span>
-                        </div>
-                    </div>
-                    <div class="course-faculty">
-                        <strong>Faculty:</strong> Ms. Jennifer Lee, Mr. David Brown
-                    </div>
-                    <div class="course-features">
-                        <span class="feature">Creative Projects</span>
-                        <span class="feature">Adobe Certified</span>
-                        <span class="feature">Portfolio Review</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- Business Analytics Course -->
-            <div class="course-card filterable-item searchable-item" 
-                 data-course-type="business" 
-                 data-duration="long" 
-                 data-level="intermediate" 
-                 data-fee-range="high">
-                <div class="course-image">
-                    <img src="/images/course-business-analytics.jpg" alt="Business Analytics" data-src="/images/course-business-analytics.jpg" class="lazy">
-                </div>
-                <div class="course-content">
-                    <div class="course-category">Business</div>
-                    <h3>Business Analytics & Intelligence</h3>
-                    <p>Master Excel, SQL, Tableau, Power BI, and statistical analysis for business decision making.</p>
-                    <div class="course-details">
-                        <div class="detail-item">
-                            <i class="fas fa-clock"></i>
-                            <span>7 Months</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-signal"></i>
-                            <span>Intermediate</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>18 Students</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span>$1099</span>
-                        </div>
-                    </div>
-                    <div class="course-faculty">
-                        <strong>Faculty:</strong> Prof. Mark Johnson, Ms. Anna White
-                    </div>
-                    <div class="course-features">
-                        <span class="feature">Case Studies</span>
-                        <span class="feature">Industry Tools</span>
-                        <span class="feature">Internship Support</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">Enroll Now</a>
-                </div>
-            </div>
-
-            <!-- English Communication Course -->
-            <div class="course-card filterable-item searchable-item" 
-                 data-course-type="language" 
-                 data-duration="short" 
-                 data-level="beginner" 
-                 data-fee-range="low">
-                <div class="course-image">
-                    <img src="/images/course-english.jpg" alt="English Communication" data-src="/images/course-english.jpg" class="lazy">
-                </div>
-                <div class="course-content">
-                    <div class="course-category">Language</div>
-                    <h3>Business English Communication</h3>
-                    <p>Improve your English speaking, writing, and presentation skills for professional environments.</p>
-                    <div class="course-details">
-                        <div class="detail-item">
-                            <i class="fas fa-clock"></i>
-                            <span>3 Months</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-signal"></i>
-                            <span>Beginner</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-users"></i>
-                            <span>25 Students</span>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span>$299</span>
-                        </div>
-                    </div>
-                    <div class="course-faculty">
-                        <strong>Faculty:</strong> Ms. Rachel Green, Mr. James Wilson
-                    </div>
-                    <div class="course-features">
-                        <span class="feature">Speaking Practice</span>
-                        <span class="feature">Mock Interviews</span>
-                        <span class="feature">Certification</span>
-                    </div>
-                    <a href="#" class="btn btn-primary">Enroll Now</a>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
-    </div>
-</section>
+        <?php endif; ?>
+            </section>
 
 <style>
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.empty-state i {
+    font-size: 5rem;
+    color: #bdc3c7;
+    margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+}
+
 .courses-filter {
     background: #f8f9fa;
     padding: 2rem 0;
@@ -420,10 +246,10 @@ include '../includes/public_header.php';
     border-color: #3498db;
 }
 
-.search-group {
+.search-input-wrapper {
     position: relative;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .search-input {
@@ -440,10 +266,11 @@ include '../includes/public_header.php';
     border-color: #3498db;
 }
 
-.search-group i {
+.search-input-wrapper i {
     position: absolute;
     right: 1rem;
     color: #666;
+    pointer-events: none;
 }
 
 .results-count {
