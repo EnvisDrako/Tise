@@ -13,6 +13,18 @@ include '../includes/db_connect.php';
 $success_message = '';
 $error_message = '';
 
+// Get active courses from database
+$courses = [];
+try {
+    $db = DatabaseConnection::getInstance();
+    $pdo = $db->getConnection();
+    $stmt = $pdo->query("SELECT title FROM courses WHERE status='active' ORDER BY title ASC");
+    $courses = $stmt->fetchAll(PDO::FETCH_COLUMN);
+} catch (PDOException $e) {
+    // Silently fail, will show "Other" option only
+    error_log("Error loading courses: " . $e->getMessage());
+}
+
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $full_name = trim($_POST['full_name'] ?? '');
@@ -230,13 +242,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <label for="course_interest">Course of Interest *</label>
                             <select id="course_interest" name="course_interest" class="form-control" required>
                                 <option value="">Select a course</option>
-                                <option value="Web Development" <?php  echo ($_POST['course_interest'] ?? '') === 'Web Development' ? 'selected' : ''; ?>>Full Stack Web Development</option>
-                                <option value="Data Science" <?php  echo ($_POST['course_interest'] ?? '') === 'Data Science' ? 'selected' : ''; ?>>Data Science & Analytics</option>
-                                <option value="Digital Marketing" <?php  echo ($_POST['course_interest'] ?? '') === 'Digital Marketing' ? 'selected' : ''; ?>>Digital Marketing Mastery</option>
-                                <option value="Graphic Design" <?php  echo ($_POST['course_interest'] ?? '') === 'Graphic Design' ? 'selected' : ''; ?>>Graphic Design & Visual Arts</option>
-                                <option value="Business Analytics" <?php  echo ($_POST['course_interest'] ?? '') === 'Business Analytics' ? 'selected' : ''; ?>>Business Analytics & Intelligence</option>
-                                <option value="English Communication" <?php  echo ($_POST['course_interest'] ?? '') === 'English Communication' ? 'selected' : ''; ?>>Business English Communication</option>
-                                <option value="Other" <?php  echo ($_POST['course_interest'] ?? '') === 'Other' ? 'selected' : ''; ?>>Other (Please specify in message)</option>
+                                <?php if (!empty($courses)): ?>
+                                    <?php foreach ($courses as $course): ?>
+                                        <option value="<?php echo htmlspecialchars($course); ?>" <?php echo ($_POST['course_interest'] ?? '') === $course ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($course); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                <option value="Other" <?php echo ($_POST['course_interest'] ?? '') === 'Other' ? 'selected' : ''; ?>>Other (Please specify in message)</option>
                             </select>
                             <div class="field-error"></div>
                         </div>

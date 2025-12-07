@@ -138,5 +138,35 @@
     
     <script src="<?php echo asset('js/public.js'); ?>"></script>
     <script src="<?php echo asset('js/seo-social.js'); ?>"></script>
+    
+    <!-- Header Shrink on Scroll - Fix Flickering -->
+    <script>
+    (function() {
+        const header = document.querySelector('.main-header');
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        
+        function updateHeader() {
+            if (window.scrollY > 50) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+            ticking = false;
+        }
+        
+        function requestTick() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', requestTick, { passive: true });
+        
+        // Initial check
+        updateHeader();
+    })();
+    </script>
 </body>
 </html>

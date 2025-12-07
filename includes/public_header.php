@@ -115,7 +115,7 @@ if (isset($course_data) && is_array($course_data)) {
             <div class="nav-container">
                 <div class="nav-logo">
                     <a href="<?php echo url('/'); ?>">
-                        <img src="<?php echo asset('images/logos/logo.png'); ?>" alt="Taset Academy" class="logo-img" style="height: 90px; width: auto; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                        <img src="<?php echo asset('images/logos/logo.png'); ?>" alt="Taset Academy" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
                         <span style="display:none;"><i class="fas fa-graduation-cap"></i> Taset Academy</span>
                     </a>
                 </div>
