@@ -5,6 +5,19 @@ define('SYSTEM_ACCESS', true);
 $page_title = "Contact Us";
 $page_description = "Get in touch with us for admissions, course information, or any other queries";
 include '../includes/public_header.php';
+
+// Get active courses from database
+require_once '../includes/db_connect.php';
+$courses = [];
+try {
+    $db = DatabaseConnection::getInstance();
+    $pdo = $db->getConnection();
+    $stmt = $pdo->query("SELECT title FROM courses WHERE status='active' ORDER BY title ASC");
+    $courses = $stmt->fetchAll(PDO::FETCH_COLUMN);
+} catch (PDOException $e) {
+    // Silently fail
+    error_log("Error loading courses: " . $e->getMessage());
+}
 ?>
 
 <div class="page-header">
@@ -19,30 +32,11 @@ include '../includes/public_header.php';
         <div class="contact-grid">
             <div class="contact-card">
                 <div class="contact-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <h3>Visit Us</h3>
-                <div class="contact-details">
-                    <p><strong>Main Campus</strong></p>
-                    <p>123 Education Street<br>
-                    Knowledge City, State 12345<br>
-                    Country</p>
-                </div>
-                <a href="https://maps.google.com" target="_blank" class="btn btn-outline">
-                    <i class="fas fa-directions"></i> Get Directions
-                </a>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-icon">
                     <i class="fas fa-phone"></i>
                 </div>
                 <h3>Call Us</h3>
                 <div class="contact-details">
-                    <p><strong>Main Office:</strong> <a href="tel:+12345678900">+1 234 567 8900</a></p>
-                    <p><strong>Admissions:</strong> <a href="tel:+12345678901">+1 234 567 8901</a></p>
-                    <p><strong>Placement Cell:</strong> <a href="tel:+12345678902">+1 234 567 8902</a></p>
-                    <p><strong>Student Support:</strong> <a href="tel:+12345678903">+1 234 567 8903</a></p>
+                    <p><strong>Main Office:</strong> <a href="tel:+918547521277">+91 8547521277</a></p>
                 </div>
             </div>
 
@@ -52,10 +46,7 @@ include '../includes/public_header.php';
                 </div>
                 <h3>Email Us</h3>
                 <div class="contact-details">
-                    <p><strong>General:</strong> <a href="mailto:info@eduportal.com">info@eduportal.com</a></p>
-                    <p><strong>Admissions:</strong> <a href="mailto:admissions@eduportal.com">admissions@eduportal.com</a></p>
-                    <p><strong>Placement:</strong> <a href="mailto:placement@eduportal.com">placement@eduportal.com</a></p>
-                    <p><strong>Support:</strong> <a href="mailto:support@eduportal.com">support@eduportal.com</a></p>
+                    <p><strong>General:</strong> <a href="mailto:tasetacademy@gmail.com">tasetacademy@gmail.com</a></p>
                 </div>
             </div>
 
@@ -75,164 +66,169 @@ include '../includes/public_header.php';
     </div>
 </section>
 
-<section class="departments section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Department Contacts</h2>
-            <p>Connect directly with specific departments for specialized assistance</p>
-        </div>
-        <div class="departments-grid">
-            <div class="department-card">
-                <div class="department-icon">
-                    <i class="fas fa-user-graduate"></i>
-                </div>
-                <h3>Admissions Office</h3>
-                <p>Course information, enrollment process, eligibility requirements</p>
-                <div class="department-contact">
-                    <p><i class="fas fa-phone"></i> +1 234 567 8901</p>
-                    <p><i class="fas fa-envelope"></i> admissions@eduportal.com</p>
-                    <p><i class="fas fa-user"></i> Ms. Sarah Johnson, Admissions Director</p>
-                </div>
-                <div class="department-hours">
-                    <strong>Available:</strong> Mon-Fri 9 AM - 5 PM
-                </div>
-            </div>
-
-            <div class="department-card">
-                <div class="department-icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <h3>Placement Cell</h3>
-                <p>Career guidance, job placement assistance, industry connections</p>
-                <div class="department-contact">
-                    <p><i class="fas fa-phone"></i> +1 234 567 8902</p>
-                    <p><i class="fas fa-envelope"></i> placement@eduportal.com</p>
-                    <p><i class="fas fa-user"></i> Mr. Michael Davis, Placement Head</p>
-                </div>
-                <div class="department-hours">
-                    <strong>Available:</strong> Mon-Fri 10 AM - 4 PM
-                </div>
-            </div>
-
-            <div class="department-card">
-                <div class="department-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3>Academic Office</h3>
-                <p>Course curriculum, academic support, faculty coordination</p>
-                <div class="department-contact">
-                    <p><i class="fas fa-phone"></i> +1 234 567 8904</p>
-                    <p><i class="fas fa-envelope"></i> academic@eduportal.com</p>
-                    <p><i class="fas fa-user"></i> Prof. Emily Wilson, Academic Head</p>
-                </div>
-                <div class="department-hours">
-                    <strong>Available:</strong> Mon-Fri 9 AM - 5 PM
-                </div>
-            </div>
-
-            <div class="department-card">
-                <div class="department-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h3>Student Support</h3>
-                <p>Technical support, student services, general assistance</p>
-                <div class="department-contact">
-                    <p><i class="fas fa-phone"></i> +1 234 567 8903</p>
-                    <p><i class="fas fa-envelope"></i> support@eduportal.com</p>
-                    <p><i class="fas fa-user"></i> Ms. Lisa Anderson, Support Manager</p>
-                </div>
-                <div class="department-hours">
-                    <strong>Available:</strong> Mon-Sat 8 AM - 6 PM
-                </div>
-            </div>
-
-            <div class="department-card">
-                <div class="department-icon">
-                    <i class="fas fa-dollar-sign"></i>
-                </div>
-                <h3>Finance Office</h3>
-                <p>Fee payment, financial aid, scholarship information</p>
-                <div class="department-contact">
-                    <p><i class="fas fa-phone"></i> +1 234 567 8905</p>
-                    <p><i class="fas fa-envelope"></i> finance@eduportal.com</p>
-                    <p><i class="fas fa-user"></i> Mr. Robert Taylor, Finance Manager</p>
-                </div>
-                <div class="department-hours">
-                    <strong>Available:</strong> Mon-Fri 9 AM - 4 PM
-                </div>
-            </div>
-
-            <div class="department-card">
-                <div class="department-icon">
-                    <i class="fas fa-handshake"></i>
-                </div>
-                <h3>Corporate Relations</h3>
-                <p>Industry partnerships, corporate training, collaboration opportunities</p>
-                <div class="department-contact">
-                    <p><i class="fas fa-phone"></i> +1 234 567 8906</p>
-                    <p><i class="fas fa-envelope"></i> corporate@eduportal.com</p>
-                    <p><i class="fas fa-user"></i> Ms. Jennifer Lee, Corporate Relations</p>
-                </div>
-                <div class="department-hours">
-                    <strong>Available:</strong> Mon-Fri 10 AM - 5 PM
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="map-section section">
     <div class="container">
         <div class="section-title">
             <h2>Find Us</h2>
-            <p>Located in the heart of the education district with easy access to public transportation</p>
+            <p>Visit any of our three convenient locations</p>
         </div>
-        <div class="map-container">
-            <div class="map-placeholder">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.123456789!2d-74.0059413!3d40.7127753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzQ2LjAiTiA3NMKwMDAnMjEuNCJX!5e0!3m2!1sen!2sus!4v1234567890123"
-                    width="100%" 
-                    height="400" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+        
+        <!-- Location Tabs -->
+        <div class="location-tabs">
+            <button class="location-tab active" onclick="showLocation(1)">
+                <i class="fas fa-map-marker-alt"></i> Mallappally
+            </button>
+            <button class="location-tab" onclick="showLocation(2)">
+                <i class="fas fa-map-marker-alt"></i> Kozhencherry
+            </button>
+            <button class="location-tab" onclick="showLocation(3)">
+                <i class="fas fa-map-marker-alt"></i> Pathanamthitta
+            </button>
+        </div>
+
+        <!-- Location 1 - Mallappally -->
+        <div class="location-content active" id="location-1">
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15733.123456789!2d76.7097484!3d9.3358974!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMjAnMDkuMiJOIDc2wrA0MiczNS4xIkU!5e0!3m2!1sen!2sin!4v1234567890123"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="map-info">
+                    <h3>Mallappally Campus</h3>
+                    <div class="location-details">
+                        <div class="location-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Address</strong>
+                                <p>Mallappally, Pathanamthitta District, Kerala</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Operating Hours</strong>
+                                <p>Mon-Fri: 9:00 AM - 6:00 PM<br>
+                                Saturday: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Contact</strong>
+                                <p><a href="tel:+918547521277">+91 8547521277</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://maps.app.goo.gl/rv6repheWCb8W2og7" 
+                       target="_blank" 
+                       class="btn btn-primary btn-directions">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
             </div>
-            <div class="map-info">
-                <h3>Campus Location</h3>
-                <div class="location-details">
-                    <div class="location-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Address</strong>
-                            <p>123 Education Street, Knowledge City, State 12345</p>
+        </div>
+
+        <!-- Location 2 - Kozhencherry -->
+        <div class="location-content" id="location-2">
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15733.123456789!2d76.7097484!3d9.3358974!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMjAnMDkuMiJOIDc2wrA0MiczNS4xIkU!5e0!3m2!1sen!2sin!4v1234567890123"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="map-info">
+                    <h3>Kozhencherry Campus</h3>
+                    <div class="location-details">
+                        <div class="location-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Address</strong>
+                                <p>Kozhencherry, Pathanamthitta District, Kerala</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Operating Hours</strong>
+                                <p>Mon-Fri: 9:00 AM - 6:00 PM<br>
+                                Saturday: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Contact</strong>
+                                <p><a href="tel:+918547521277">+91 8547521277</a></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="location-item">
-                        <i class="fas fa-subway"></i>
-                        <div>
-                            <strong>Public Transport</strong>
-                            <p>Metro Station: Education Hub (5 min walk)<br>
-                            Bus Routes: 15, 23, 45, 67</p>
+                    <a href="https://maps.app.goo.gl/K81pGTXhiycee6wG9" 
+                       target="_blank" 
+                       class="btn btn-primary btn-directions">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Location 3 - Pathanamthitta -->
+        <div class="location-content" id="location-3">
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15733.123456789!2d76.7097484!3d9.3358974!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMjAnMDkuMiJOIDc2wrA0MiczNS4xIkU!5e0!3m2!1sen!2sin!4v1234567890123"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="map-info">
+                    <h3>Pathanamthitta Campus</h3>
+                    <div class="location-details">
+                        <div class="location-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Address</strong>
+                                <p>Pathanamthitta, Kerala</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Operating Hours</strong>
+                                <p>Mon-Fri: 9:00 AM - 6:00 PM<br>
+                                Saturday: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Contact</strong>
+                                <p><a href="tel:+918547521277">+91 8547521277</a></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="location-item">
-                        <i class="fas fa-car"></i>
-                        <div>
-                            <strong>Parking</strong>
-                            <p>Free parking available for students and visitors<br>
-                            Covered parking: 200+ spaces</p>
-                        </div>
-                    </div>
-                    <div class="location-item">
-                        <i class="fas fa-landmark"></i>
-                        <div>
-                            <strong>Nearby Landmarks</strong>
-                            <p>City Library (2 blocks), Central Park (1 km)<br>
-                            Shopping Mall (500m), Food Court (200m)</p>
-                        </div>
-                    </div>
+                    <a href="https://maps.app.goo.gl/NF9uyTYd7Namun4F6" 
+                       target="_blank" 
+                       class="btn btn-primary btn-directions">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
                 </div>
             </div>
         </div>
@@ -262,12 +258,13 @@ include '../includes/public_header.php';
                     <div class="form-group">
                         <select name="course_interest" class="form-control" required>
                             <option value="">Select Course Interest</option>
-                            <option value="Web Development">Web Development</option>
-                            <option value="Data Science">Data Science</option>
-                            <option value="Digital Marketing">Digital Marketing</option>
-                            <option value="Graphic Design">Graphic Design</option>
-                            <option value="Business Analytics">Business Analytics</option>
-                            <option value="English Communication">English Communication</option>
+                            <?php if (!empty($courses)): ?>
+                                <?php foreach ($courses as $course): ?>
+                                    <option value="<?php echo htmlspecialchars($course); ?>">
+                                        <?php echo htmlspecialchars($course); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -289,25 +286,18 @@ include '../includes/public_header.php';
             <div class="contact-alternatives">
                 <h3>Prefer Other Ways to Connect?</h3>
                 <div class="alternatives-grid">
-                    <a href="tel:+12345678900" class="alternative-option">
+                    <a href="tel:+918547521277" class="alternative-option">
                         <i class="fas fa-phone"></i>
                         <div>
                             <strong>Call Now</strong>
                             <span>Speak directly with our team</span>
                         </div>
                     </a>
-                    <a href="mailto:info@eduportal.com" class="alternative-option">
+                    <a href="mailto:tasetacademy.com" class="alternative-option">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <strong>Email Us</strong>
                             <span>Send detailed queries</span>
-                        </div>
-                    </a>
-                    <a href="#" class="alternative-option" onclick="openLiveChat()">
-                        <i class="fas fa-comments"></i>
-                        <div>
-                            <strong>Live Chat</strong>
-                            <span>Instant support available</span>
                         </div>
                     </a>
                     <a href="<?php echo url('enquiry'); ?>" class="alternative-option">
@@ -319,65 +309,6 @@ include '../includes/public_header.php';
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="social-connect section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Connect With Us</h2>
-            <p>Follow us on social media for updates, tips, and student success stories</p>
-        </div>
-        <div class="social-grid">
-            <a href="#" class="social-card facebook">
-                <i class="fab fa-facebook-f"></i>
-                <div class="social-info">
-                    <h3>Facebook</h3>
-                    <p>Daily updates and community discussions</p>
-                    <span class="followers">12.5K followers</span>
-                </div>
-            </a>
-            <a href="#" class="social-card twitter">
-                <i class="fab fa-twitter"></i>
-                <div class="social-info">
-                    <h3>Twitter</h3>
-                    <p>Latest news and industry insights</p>
-                    <span class="followers">8.2K followers</span>
-                </div>
-            </a>
-            <a href="#" class="social-card linkedin">
-                <i class="fab fa-linkedin-in"></i>
-                <div class="social-info">
-                    <h3>LinkedIn</h3>
-                    <p>Professional networking and job updates</p>
-                    <span class="followers">15.3K followers</span>
-                </div>
-            </a>
-            <a href="#" class="social-card instagram">
-                <i class="fab fa-instagram"></i>
-                <div class="social-info">
-                    <h3>Instagram</h3>
-                    <p>Campus life and student achievements</p>
-                    <span class="followers">9.7K followers</span>
-                </div>
-            </a>
-            <a href="#" class="social-card youtube">
-                <i class="fab fa-youtube"></i>
-                <div class="social-info">
-                    <h3>YouTube</h3>
-                    <p>Course previews and educational content</p>
-                    <span class="followers">25.1K subscribers</span>
-                </div>
-            </a>
-            <a href="#" class="social-card whatsapp">
-                <i class="fab fa-whatsapp"></i>
-                <div class="social-info">
-                    <h3>WhatsApp</h3>
-                    <p>Quick support and instant updates</p>
-                    <span class="followers">Join our group</span>
-                </div>
-            </a>
         </div>
     </div>
 </section>
@@ -456,74 +387,63 @@ include '../includes/public_header.php';
     color: white;
 }
 
-.departments-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-}
-
-.department-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.department-card:hover {
-    transform: translateY(-3px);
-}
-
-.department-icon {
-    width: 60px;
-    height: 60px;
-    background: #ecf0f1;
-    border-radius: 50%;
+.location-tabs {
     display: flex;
-    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
 }
 
-.department-icon i {
-    font-size: 1.5rem;
-    color: #3498db;
-}
-
-.department-card h3 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-}
-
-.department-card p {
-    color: #666;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.department-contact {
-    margin-bottom: 1rem;
-}
-
-.department-contact p {
-    margin-bottom: 0.5rem;
+.location-tab {
+    padding: 1rem 2rem;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
 }
 
-.department-contact i {
+.location-tab:hover {
+    border-color: #3498db;
     color: #3498db;
-    width: 16px;
+    transform: translateY(-2px);
 }
 
-.department-hours {
-    background: #f8f9fa;
-    padding: 0.75rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: #555;
+.location-tab.active {
+    background: #3498db;
+    border-color: #3498db;
+    color: white;
+}
+
+.location-tab i {
+    font-size: 1.1rem;
+}
+
+.location-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.location-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .map-container {
@@ -537,7 +457,7 @@ include '../includes/public_header.php';
 }
 
 .map-placeholder {
-    height: 400px;
+    height: 450px;
 }
 
 .map-placeholder iframe {
@@ -547,11 +467,22 @@ include '../includes/public_header.php';
 
 .map-info {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .map-info h3 {
     color: #2c3e50;
     margin-bottom: 1.5rem;
+}
+
+.btn-directions {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    text-decoration: none;
 }
 
 .location-details {
@@ -675,77 +606,26 @@ include '../includes/public_header.php';
     font-size: 0.9rem;
 }
 
-.social-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.social-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-decoration: none;
-    color: #2c3e50;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.social-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.social-card i {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    flex-shrink: 0;
-}
-
-.social-card.facebook i { background: #1877f2; }
-.social-card.twitter i { background: #1da1f2; }
-.social-card.linkedin i { background: #0077b5; }
-.social-card.instagram i { background: #e4405f; }
-.social-card.youtube i { background: #ff0000; }
-.social-card.whatsapp i { background: #25d366; }
-
-.social-info h3 {
-    margin-bottom: 0.25rem;
-    font-size: 1.1rem;
-}
-
-.social-info p {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
-}
-
-.followers {
-    color: #3498db;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
 @media (max-width: 768px) {
     .contact-grid {
         grid-template-columns: 1fr;
     }
     
-    .departments-grid {
-        grid-template-columns: 1fr;
+    .location-tabs {
+        flex-direction: column;
+    }
+    
+    .location-tab {
+        width: 100%;
+        justify-content: center;
     }
     
     .map-container {
         grid-template-columns: 1fr;
+    }
+    
+    .map-placeholder {
+        height: 300px;
     }
     
     .map-info {
@@ -756,14 +636,26 @@ include '../includes/public_header.php';
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
-    .social-grid {
-        grid-template-columns: 1fr;
-    }
 }
 </style>
 
 <script>
+function showLocation(locationNumber) {
+    // Hide all location contents
+    const contents = document.querySelectorAll('.location-content');
+    contents.forEach(content => content.classList.remove('active'));
+    
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.location-tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    // Show selected location
+    document.getElementById('location-' + locationNumber).classList.add('active');
+    
+    // Activate selected tab
+    tabs[locationNumber - 1].classList.add('active');
+}
+
 function openLiveChat() {
     // Placeholder for live chat integration
     alert('Live chat feature will be integrated with your preferred chat service (e.g., Intercom, Zendesk, etc.)');

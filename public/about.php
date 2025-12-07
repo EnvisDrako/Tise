@@ -46,11 +46,9 @@ include '../includes/public_header.php';
         <div class="about-content">
             <div class="about-text">
                 <h2>Our Story</h2>
-                <p>Founded with a vision to provide world-class education and training, our institution has been at the forefront of educational innovation for over a decade. We believe in nurturing talent, fostering creativity, and preparing students for the challenges of tomorrow.</p>
-                <p>Our commitment to excellence is reflected in our comprehensive curriculum, state-of-the-art facilities, and dedicated faculty who bring years of industry experience to the classroom.</p>
-            </div>
-            <div class="about-image">
-                <img src="/images/about-building.jpg" alt="Our Institution" data-src="/images/about-building.jpg" class="lazy">
+                <p>Taset Academy was founded with a clear vision—to deliver world-class skill training that bridges the gap between learning and employability. For over a decade, we have been at the forefront of educational innovation, empowering learners with industry-ready skills and practical expertise.</p>
+                <p>Driven by our motto “Skill Training • Certification • Placements,” we focus on nurturing talent, fostering creativity, and preparing students for the dynamic challenges of the modern workforce. Our cutting-edge curriculum, advanced training labs, and dedicated faculty with strong industry backgrounds ensure that every learner receives a high-quality, future-oriented education.</p>
+                <p>At Taset Academy, we don't just teach—we transform potential into professional success.</p>
             </div>
         </div>
     </div>
@@ -64,14 +62,14 @@ include '../includes/public_header.php';
                     <i class="fas fa-bullseye"></i>
                 </div>
                 <h3>Our Mission</h3>
-                <p>To provide quality education and training that empowers students with the knowledge, skills, and confidence needed to excel in their chosen careers and contribute meaningfully to society.</p>
+                <p>To deliver high-quality, job-oriented skill training that equips students with practical knowledge, globally recognized certifications, and the confidence to excel in their chosen careers—ultimately enabling them to contribute meaningfully to industry and society.</p>
             </div>
             <div class="card">
                 <div class="card-icon">
                     <i class="fas fa-eye"></i>
                 </div>
                 <h3>Our Vision</h3>
-                <p>To be recognized as a leading educational institution that transforms lives through innovative learning experiences and creates a positive impact on the global community.</p>
+                <p>To be a leading skill-development institution recognized for transforming lives through innovative training programs, strong industry partnerships, and a commitment to building a skilled and employable global community.</p>
             </div>
             <div class="card">
                 <div class="card-icon">
@@ -93,98 +91,39 @@ include '../includes/public_header.php';
         <div class="leadership-grid">
             <div class="leader-card">
                 <div class="leader-image">
-                    <img src="/images/director.jpg" alt="Dr. Sarah Williams" data-src="/images/director.jpg" class="lazy">
+                    <img src="images\jomon.jpg" alt="Mr. Jomon Cheriyan James" data-src="images\jomon.jpg" class="lazy">
                 </div>
                 <div class="leader-info">
-                    <h3>Dr. Sarah Williams</h3>
+                    <h3>Mr. Jomon Cheriyan James</h3>
                     <h4>Director & Founder</h4>
-                    <p>With over 20 years of experience in education and industry, Dr. Williams leads our institution with a passion for innovation and student success.</p>
-                    <div class="leader-qualifications">
-                        <span>Ph.D. in Computer Science</span>
-                        <span>Former Industry Executive</span>
-                    </div>
                 </div>
             </div>
             <div class="leader-card">
                 <div class="leader-image">
-                    <img src="/images/academic-head.jpg" alt="Prof. Michael Johnson" data-src="/images/academic-head.jpg" class="lazy">
+                    <img src="/images/academic-head.jpg" alt="Mr. K M Riyad" data-src="/images/academic-head.jpg" class="lazy">
                 </div>
                 <div class="leader-info">
-                    <h3>Prof. Michael Johnson</h3>
-                    <h4>Academic Head</h4>
-                    <p>Prof. Johnson oversees our academic programs and ensures the highest standards of curriculum design and delivery.</p>
-                    <div class="leader-qualifications">
-                        <span>M.Tech in Information Technology</span>
-                        <span>15+ Years Teaching Experience</span>
-                    </div>
+                    <h3>Mr. K M Riyad</h3>
+                    <h4>Director</h4>
                 </div>
             </div>
             <div class="leader-card">
                 <div class="leader-image">
-                    <img src="/images/placement-head.jpg" alt="Ms. Emily Davis" data-src="/images/placement-head.jpg" class="lazy">
+                    <img src="images\perumal.jpg" alt="Dr. Perumal Koshy" data-src="images\perumal.jpg" class="lazy">
                 </div>
                 <div class="leader-info">
-                    <h3>Ms. Emily Davis</h3>
-                    <h4>Placement & Career Services Head</h4>
-                    <p>Ms. Davis leads our placement initiatives and maintains strong industry connections to ensure excellent career opportunities for our students.</p>
-                    <div class="leader-qualifications">
-                        <span>MBA in Human Resources</span>
-                        <span>Industry Relations Expert</span>
-                    </div>
+                    <h3>Dr. Perumal Koshy</h3>
+                    <h4>Academic Consultant</h4>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="facilities section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Facilities</h2>
-            <p>Modern infrastructure designed to enhance the learning experience</p>
-        </div>
-        <div class="facilities-grid">
-            <div class="facility-item">
-                <div class="facility-icon">
-                    <i class="fas fa-desktop"></i>
+            <div class="leader-card">
+                <div class="leader-image">
+                    <img src="images\varghese.jpg" alt="Mr. Varghese Mathew" data-src="images\varghese.jpg" class="lazy">
                 </div>
-                <h3>Computer Labs</h3>
-                <p>State-of-the-art computer labs with latest hardware and software for hands-on learning.</p>
-            </div>
-            <div class="facility-item">
-                <div class="facility-icon">
-                    <i class="fas fa-chalkboard"></i>
+                <div class="leader-info">
+                    <h3>Mr. Varghese Mathew</h3>
+                    <h4>Director</h4>
                 </div>
-                <h3>Smart Classrooms</h3>
-                <p>Interactive smart boards and multimedia equipment for engaging classroom sessions.</p>
-            </div>
-            <div class="facility-item">
-                <div class="facility-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-                <h3>Library</h3>
-                <p>Comprehensive library with books, journals, and digital resources for research and study.</p>
-            </div>
-            <div class="facility-item">
-                <div class="facility-icon">
-                    <i class="fas fa-wifi"></i>
-                </div>
-                <h3>High-Speed Internet</h3>
-                <p>Campus-wide Wi-Fi connectivity ensuring seamless access to online resources.</p>
-            </div>
-            <div class="facility-item">
-                <div class="facility-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3>Seminar Halls</h3>
-                <p>Well-equipped seminar halls for workshops, guest lectures, and presentations.</p>
-            </div>
-            <div class="facility-item">
-                <div class="facility-icon">
-                    <i class="fas fa-coffee"></i>
-                </div>
-                <h3>Student Lounge</h3>
-                <p>Comfortable spaces for students to relax, collaborate, and network with peers.</p>
             </div>
         </div>
     </div>
@@ -202,21 +141,21 @@ include '../includes/public_header.php';
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <h3>Address</h3>
-                <p>123 Education Street<br>Knowledge City, State 12345<br>Country</p>
+                <p>Mallappally<br>Pathanamthitta<br>Kozhencherry</p>
             </div>
             <div class="contact-item">
                 <div class="contact-icon">
                     <i class="fas fa-phone"></i>
                 </div>
                 <h3>Phone</h3>
-                <p>Main: +1 234 567 8900<br>Admissions: +1 234 567 8901<br>Placement: +1 234 567 8902</p>
+                <p>Main: +91 8111954300</p>
             </div>
             <div class="contact-item">
                 <div class="contact-icon">
                     <i class="fas fa-envelope"></i>
                 </div>
                 <h3>Email</h3>
-                <p>info@eduportal.com<br>admissions@eduportal.com<br>placement@eduportal.com</p>
+                <p>tasetacademy@gmail.com</p>
             </div>
             <div class="contact-item">
                 <div class="contact-icon">
@@ -232,8 +171,8 @@ include '../includes/public_header.php';
 <style>
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
     align-items: center;
 }
 
@@ -247,12 +186,6 @@ include '../includes/public_header.php';
     margin-bottom: 1.5rem;
     line-height: 1.8;
     color: #555;
-}
-
-.about-image img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .mission-vision {

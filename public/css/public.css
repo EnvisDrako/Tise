@@ -26,11 +26,29 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    /* FIX: Prevent flickering */
+    min-height: 120px;
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    /* Smooth transition for shrink animation */
+    transition: min-height 0.25s ease, box-shadow 0.2s ease;
+}
+
+/* Shrunk state when scrolling */
+.main-header.shrink {
+    min-height: 80px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .navbar {
     padding: 1rem 0;
     position: relative;
+    transition: padding 0.25s ease;
+}
+
+.main-header.shrink .navbar {
+    padding: 0.5rem 0;
 }
 
 .nav-container {
@@ -40,10 +58,12 @@ body {
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    transition: all 0.3s ease;
+    /* FIX: Remove all transitions to prevent jumps */
+    transition: none !important;
 }
 
 .nav-logo a {
@@ -54,11 +74,36 @@ body {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    /* Smooth logo shrink */
+    transition: font-size 0.25s ease, transform 0.25s ease;
+}
+
+/* Shrink logo when header shrinks */
+.main-header.shrink .nav-logo a {
+    font-size: 1.2rem;
 }
 
 .nav-logo i {
     color: #3498db;
     margin-right: 0.5rem;
+    transition: font-size 0.25s ease;
+}
+
+.main-header.shrink .nav-logo i {
+    font-size: 0.9rem;
+}
+
+/* Logo image smooth shrink */
+.logo-img {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+    transition: height 0.25s ease, transform 0.25s ease;
+    transform: translateZ(0);
+}
+
+.main-header.shrink .logo-img {
+    height: 60px;
 }
 
 /* Removed - now handled in the centered version below */

@@ -23,279 +23,28 @@ include '../includes/public_header.php';
         <div class="accreditation-grid">
             <div class="accreditation-card">
                 <div class="accreditation-logo">
-                    <img src="/images/accreditation-naac.jpg" alt="NAAC Accreditation" data-src="/images/accreditation-naac.jpg" class="lazy">
+                    <img src="images\lsc.png" alt="Logistics Skill Council" data-src="images\lsc.png" class="lazy">
                 </div>
                 <div class="accreditation-content">
-                    <h3>NAAC Accreditation</h3>
-                    <div class="accreditation-grade">Grade: A+</div>
-                    <p>Accredited by the National Assessment and Accreditation Council with the highest grade for quality education and infrastructure.</p>
-                    <div class="accreditation-details">
-                        <span class="detail-item"><i class="fas fa-calendar"></i> Valid until: 2027</span>
-                        <span class="detail-item"><i class="fas fa-certificate"></i> Certificate ID: NAAC/2024/A+/001</span>
-                    </div>
+                    <h3>Logistics Skill Council</h3>
                 </div>
             </div>
 
             <div class="accreditation-card">
                 <div class="accreditation-logo">
-                    <img src="/images/accreditation-aicte.jpg" alt="AICTE Approval" data-src="/images/accreditation-aicte.jpg" class="lazy">
+                    <img src="images\src_image.png" alt="SRC Community College" data-src="images\src_image.png" class="lazy">
                 </div>
                 <div class="accreditation-content">
-                    <h3>AICTE Approval</h3>
-                    <div class="accreditation-grade">Status: Approved</div>
-                    <p>Approved by the All India Council for Technical Education for conducting technical education programs.</p>
-                    <div class="accreditation-details">
-                        <span class="detail-item"><i class="fas fa-calendar"></i> Valid until: 2026</span>
-                        <span class="detail-item"><i class="fas fa-certificate"></i> Approval ID: AICTE/2024/TECH/456</span>
-                    </div>
+                    <h3>SRC Community College</h3>
                 </div>
             </div>
 
             <div class="accreditation-card">
                 <div class="accreditation-logo">
-                    <img src="/images/accreditation-iso.jpg" alt="ISO Certification" data-src="/images/accreditation-iso.jpg" class="lazy">
+                    <img src="images\directorlogo.png" alt="Director of Technical Education" data-src="images\directorlogo.png" class="lazy">
                 </div>
                 <div class="accreditation-content">
-                    <h3>ISO 9001:2015</h3>
-                    <div class="accreditation-grade">Certified</div>
-                    <p>ISO certified for Quality Management Systems ensuring consistent quality in educational services.</p>
-                    <div class="accreditation-details">
-                        <span class="detail-item"><i class="fas fa-calendar"></i> Valid until: 2025</span>
-                        <span class="detail-item"><i class="fas fa-certificate"></i> Certificate No: ISO/2024/QMS/789</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="industry-partnerships section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Industry Partnerships</h2>
-            <p>Strategic partnerships with leading companies for enhanced learning and placement opportunities</p>
-        </div>
-        <div class="partnership-grid">
-            <div class="partnership-card">
-                <div class="partnership-logo">
-                    <img src="/images/partner-google.jpg" alt="Google Partnership" data-src="/images/partner-google.jpg" class="lazy">
-                </div>
-                <div class="partnership-content">
-                    <h3>Google for Education</h3>
-                    <div class="partnership-type">Technology Partner</div>
-                    <p>Official Google for Education partner providing access to Google Workspace, Cloud Platform credits, and certification programs.</p>
-                    <div class="partnership-benefits">
-                        <span class="benefit">Google Cloud Credits</span>
-                        <span class="benefit">Certification Programs</span>
-                        <span class="benefit">Expert Training</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="partnership-card">
-                <div class="partnership-logo">
-                    <img src="/images/partner-microsoft.jpg" alt="Microsoft Partnership" data-src="/images/partner-microsoft.jpg" class="lazy">
-                </div>
-                <div class="partnership-content">
-                    <h3>Microsoft Learn</h3>
-                    <div class="partnership-type">Academic Partner</div>
-                    <p>Microsoft Academic Partner providing access to Azure credits, Office 365, and professional certification paths.</p>
-                    <div class="partnership-benefits">
-                        <span class="benefit">Azure Credits</span>
-                        <span class="benefit">Office 365 Access</span>
-                        <span class="benefit">Certification Vouchers</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="partnership-card">
-                <div class="partnership-logo">
-                    <img src="/images/partner-aws.jpg" alt="AWS Partnership" data-src="/images/partner-aws.jpg" class="lazy">
-                </div>
-                <div class="partnership-content">
-                    <h3>AWS Academy</h3>
-                    <div class="partnership-type">Cloud Partner</div>
-                    <p>AWS Academy member institution providing cloud computing curriculum and hands-on lab experiences.</p>
-                    <div class="partnership-benefits">
-                        <span class="benefit">AWS Credits</span>
-                        <span class="benefit">Lab Access</span>
-                        <span class="benefit">Industry Curriculum</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="partnership-card">
-                <div class="partnership-logo">
-                    <img src="/images/partner-adobe.jpg" alt="Adobe Partnership" data-src="/images/partner-adobe.jpg" class="lazy">
-                </div>
-                <div class="partnership-content">
-                    <h3>Adobe Creative Campus</h3>
-                    <div class="partnership-type">Creative Partner</div>
-                    <p>Adobe Creative Campus partner providing access to Creative Cloud suite and certification programs for design courses.</p>
-                    <div class="partnership-benefits">
-                        <span class="benefit">Creative Cloud Access</span>
-                        <span class="benefit">Certification Programs</span>
-                        <span class="benefit">Expert Resources</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="university-affiliations section">
-    <div class="container">
-        <div class="section-title">
-            <h2>University Affiliations</h2>
-            <p>Academic partnerships with renowned universities for degree and diploma programs</p>
-        </div>
-        <div class="university-grid">
-            <div class="university-card">
-                <div class="university-logo">
-                    <img src="/images/university-state.jpg" alt="State University" data-src="/images/university-state.jpg" class="lazy">
-                </div>
-                <div class="university-content">
-                    <h3>State University</h3>
-                    <div class="affiliation-type">Degree Programs</div>
-                    <p>Affiliated for Bachelor's and Master's degree programs in Computer Science, Business Administration, and Digital Arts.</p>
-                    <div class="programs-offered">
-                        <h4>Programs Offered:</h4>
-                        <ul>
-                            <li>B.Sc. Computer Science</li>
-                            <li>BBA - Business Administration</li>
-                            <li>M.Sc. Information Technology</li>
-                            <li>MBA - Digital Marketing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="university-card">
-                <div class="university-logo">
-                    <img src="/images/university-tech.jpg" alt="Technical University" data-src="/images/university-tech.jpg" class="lazy">
-                </div>
-                <div class="university-content">
-                    <h3>Technical University</h3>
-                    <div class="affiliation-type">Diploma Programs</div>
-                    <p>Affiliated for advanced diploma and certificate programs in emerging technologies and professional skills.</p>
-                    <div class="programs-offered">
-                        <h4>Programs Offered:</h4>
-                        <ul>
-                            <li>Advanced Diploma in Web Development</li>
-                            <li>Certificate in Data Science</li>
-                            <li>Diploma in Digital Marketing</li>
-                            <li>Certificate in Cloud Computing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="professional-bodies section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Professional Body Memberships</h2>
-            <p>Active memberships with professional organizations ensuring industry-relevant curriculum</p>
-        </div>
-        <div class="professional-grid">
-            <div class="professional-card">
-                <div class="professional-logo">
-                    <img src="/images/body-ieee.jpg" alt="IEEE Membership" data-src="/images/body-ieee.jpg" class="lazy">
-                </div>
-                <div class="professional-content">
-                    <h3>IEEE</h3>
-                    <p>Institute of Electrical and Electronics Engineers</p>
-                    <div class="membership-benefits">
-                        <span class="benefit">Technical Resources</span>
-                        <span class="benefit">Industry Standards</span>
-                        <span class="benefit">Professional Development</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="professional-card">
-                <div class="professional-logo">
-                    <img src="/images/body-acm.jpg" alt="ACM Membership" data-src="/images/body-acm.jpg" class="lazy">
-                </div>
-                <div class="professional-content">
-                    <h3>ACM</h3>
-                    <p>Association for Computing Machinery</p>
-                    <div class="membership-benefits">
-                        <span class="benefit">Computing Resources</span>
-                        <span class="benefit">Research Access</span>
-                        <span class="benefit">Certification Programs</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="professional-card">
-                <div class="professional-logo">
-                    <img src="/images/body-pmi.jpg" alt="PMI Membership" data-src="/images/body-pmi.jpg" class="lazy">
-                </div>
-                <div class="professional-content">
-                    <h3>PMI</h3>
-                    <p>Project Management Institute</p>
-                    <div class="membership-benefits">
-                        <span class="benefit">PM Resources</span>
-                        <span class="benefit">Best Practices</span>
-                        <span class="benefit">PMP Preparation</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="professional-card">
-                <div class="professional-logo">
-                    <img src="/images/body-ama.jpg" alt="AMA Membership" data-src="/images/body-ama.jpg" class="lazy">
-                </div>
-                <div class="professional-content">
-                    <h3>AMA</h3>
-                    <p>American Marketing Association</p>
-                    <div class="membership-benefits">
-                        <span class="benefit">Marketing Insights</span>
-                        <span class="benefit">Industry Trends</span>
-                        <span class="benefit">Professional Network</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="recognition section">
-    <div class="container">
-        <div class="section-title">
-            <h2>Awards & Recognition</h2>
-            <p>Honored by various organizations for excellence in education and innovation</p>
-        </div>
-        <div class="recognition-timeline">
-            <div class="timeline-item">
-                <div class="timeline-year">2024</div>
-                <div class="timeline-content">
-                    <h3>Best Educational Institution Award</h3>
-                    <p>Recognized by the State Education Board for outstanding contribution to technical education and student placement records.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2023</div>
-                <div class="timeline-content">
-                    <h3>Innovation in Teaching Award</h3>
-                    <p>Awarded by the National Education Council for implementing innovative teaching methodologies and technology integration.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2022</div>
-                <div class="timeline-content">
-                    <h3>Industry Partnership Excellence</h3>
-                    <p>Recognized by the Chamber of Commerce for establishing strong industry partnerships and ensuring high placement rates.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2021</div>
-                <div class="timeline-content">
-                    <h3>Digital Education Pioneer</h3>
-                    <p>Honored for successfully transitioning to digital education during the pandemic and maintaining quality standards.</p>
+                    <h3>Director of Technical Education</h3>
                 </div>
             </div>
         </div>
